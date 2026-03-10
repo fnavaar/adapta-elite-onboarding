@@ -2,10 +2,13 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { cn } from '@/lib/utils'
+import { VslVideo } from './VslVideo'
+import { CheckCircle2 } from 'lucide-react'
 
 export type FormData = {
   name: string
   email: string
+  vslWatched: boolean
   objective: string
   portfolio: string
   risk: string
@@ -46,33 +49,53 @@ function RadioCards({
 }
 
 export const Step1 = ({ data, updateData }: StepProps) => (
-  <div className="space-y-4">
-    <h2 className="text-2xl sm:text-3xl font-semibold text-primary">Como podemos chamá-lo?</h2>
-    <p className="text-slate-500 text-lg">
-      Gostaríamos de saber seu nome para um atendimento personalizado.
-    </p>
-    <Input
-      autoFocus
-      className="h-14 text-lg bg-white rounded-xl mt-4"
-      placeholder="Seu nome completo"
-      value={data.name}
-      onChange={(e) => updateData({ name: e.target.value })}
-    />
+  <div className="space-y-6">
+    <div className="space-y-2">
+      <h2 className="text-2xl sm:text-3xl font-semibold text-primary">Seus Dados</h2>
+      <p className="text-slate-500 text-lg">Para um atendimento exclusivo e personalizado.</p>
+    </div>
+    <div className="space-y-4 pt-2">
+      <div className="space-y-2">
+        <Label className="text-slate-700 font-medium">Nome Completo</Label>
+        <Input
+          autoFocus
+          className="h-14 text-lg bg-white rounded-xl"
+          placeholder="Ex: João Silva"
+          value={data.name}
+          onChange={(e) => updateData({ name: e.target.value })}
+        />
+      </div>
+      <div className="space-y-2">
+        <Label className="text-slate-700 font-medium">Melhor E-mail</Label>
+        <Input
+          type="email"
+          className="h-14 text-lg bg-white rounded-xl"
+          placeholder="nome@exemplo.com"
+          value={data.email}
+          onChange={(e) => updateData({ email: e.target.value })}
+        />
+      </div>
+    </div>
   </div>
 )
 
 export const Step2 = ({ data, updateData }: StepProps) => (
-  <div className="space-y-4">
-    <h2 className="text-2xl sm:text-3xl font-semibold text-primary">Qual seu melhor e-mail?</h2>
-    <p className="text-slate-500 text-lg">Para envio de relatórios e comunicações oficiais.</p>
-    <Input
-      autoFocus
-      type="email"
-      className="h-14 text-lg bg-white rounded-xl mt-4"
-      placeholder="nome@exemplo.com"
-      value={data.email}
-      onChange={(e) => updateData({ email: e.target.value })}
-    />
+  <div className="space-y-6">
+    <div className="space-y-2 text-center">
+      <h2 className="text-2xl sm:text-3xl font-semibold text-primary">Mensagem Importante</h2>
+      <p className="text-slate-500 text-lg">
+        Assista ao vídeo abaixo para entender nossa metodologia exclusiva.
+      </p>
+    </div>
+    <div className="pt-4">
+      <VslVideo isCompleted={data.vslWatched} onComplete={() => updateData({ vslWatched: true })} />
+    </div>
+    {data.vslWatched && (
+      <div className="max-w-[600px] mx-auto mt-4 p-4 bg-green-50 border border-green-200 rounded-xl flex items-center justify-center gap-2 text-green-700 animate-in fade-in slide-in-from-bottom-2 duration-500">
+        <CheckCircle2 className="h-5 w-5" />
+        <span className="font-medium">Vídeo concluído! Você já pode continuar.</span>
+      </div>
+    )}
   </div>
 )
 
