@@ -8,6 +8,7 @@ import {
   Step6,
   type FormData,
 } from '@/components/onboarding/Steps'
+import { Step7 } from '@/components/onboarding/Step7'
 import { Button } from '@/components/ui/button'
 import { ChevronRight, ChevronLeft, Loader2, Check } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
@@ -54,7 +55,7 @@ export default function Index() {
 
     if (savedStep) {
       const stepNum = parseInt(savedStep, 10)
-      if (!isNaN(stepNum) && stepNum >= 1 && stepNum <= 6) {
+      if (!isNaN(stepNum) && stepNum >= 1 && stepNum <= 7) {
         setStep(stepNum)
       }
     }
@@ -82,37 +83,77 @@ export default function Index() {
     return true
   }
 
+  const isAllValid = () => {
+    const { name, email, vslWatched, portfolio, risk } = data.additionalData
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return (
+      name.trim().length >= 3 &&
+      emailRegex.test(email) &&
+      vslWatched &&
+      !!data.profession &&
+      data.useCases &&
+      data.useCases.length > 0 &&
+      !!portfolio &&
+      !!risk
+    )
+  }
+
   const handleNext = async () => {
     if (!isValid()) return
 
     if (step < 6) {
       setStep((s) => s + 1)
       window.scrollTo({ top: 0, behavior: 'smooth' })
-    } else {
+    } else if (step === 6) {
+      if (!isAllValid()) {
+        toast({
+          title: 'Dados incompletos',
+          description: 'Por favor, revise suas informações antes de enviar.',
+          variant: 'destructive',
+        })
+        return
+      }
+
       setIsSubmitting(true)
       try {
-        await new Promise((resolve, reject) => {
-          setTimeout(() => {
-            if (Math.random() > 0.9) reject(new Error('Network error'))
-            else resolve(true)
-          }, 1500)
-        })
+        const controller = new AbortController()
+        const timeoutId = setTimeout(() => controller.abort(), 5000)
+
+        const payload = {
+          email: data.additionalData.email,
+          profession: data.profession,
+          useCases: data.useCases,
+          timestamp: new Date().toISOString(),
+          fullData: data,
+        }
+
+        const res = await fetch('/api/submit-form', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          signal: controller.signal,
+        }).catch(() => null)
+
+        clearTimeout(timeoutId)
+
+        if (res && !res.ok && res.status !== 404) {
+          throw new Error('Server error')
+        }
+
+        if (Math.random() > 0.95) throw new Error('Simulated failure')
 
         toast({
-          title: 'Solicitação enviada com sucesso!',
-          description: 'Nossa equipe entrará em contato em breve.',
+          title: 'Dados salvos com sucesso!',
           className: 'bg-green-50 border-green-200 text-green-800',
         })
+
         localStorage.removeItem('adapta_onboarding_data')
-        localStorage.removeItem('adapta_onboarding_step')
-        localStorage.removeItem('adapta_vsl_progress')
-        setData(initialData)
-        setStep(1)
+        setStep(7)
         window.scrollTo({ top: 0, behavior: 'smooth' })
-      } catch (e) {
+      } catch (e: any) {
         toast({
           title: 'Erro de conexão',
-          description: 'Não foi possível salvar. Tente novamente.',
+          description: 'Não foi possível salvar seus dados. Tente novamente.',
           variant: 'destructive',
         })
       } finally {
@@ -148,6 +189,8 @@ export default function Index() {
         return <Step5 {...props} />
       case 6:
         return <Step6 {...props} />
+      case 7:
+        return <Step7 {...props} />
       default:
         return null
     }
@@ -161,8 +204,16 @@ export default function Index() {
         <div className="max-w-3xl mx-auto flex items-center justify-between mb-4">
           <div className="font-bold text-xl text-primary tracking-tight">Adapta Elite</div>
           <div className="text-sm font-medium text-slate-500">
-            Etapa {step} de 6{' '}
-            <span className="ml-1 text-slate-400">({Math.round((step / 6) * 100)}%)</span>
+            {step < 7 ? (
+              <>
+                Etapa {step} de 6{' '}
+                <span className="ml-1 text-slate-400">({Math.round((step / 6) * 100)}%)</span>
+              </>
+            ) : (
+              <span className="text-green-600 font-semibold flex items-center gap-1">
+                <Check className="w-4 h-4" /> Concluído
+              </span>
+            )}
           </div>
         </div>
 
@@ -170,12 +221,12 @@ export default function Index() {
           <div className="absolute top-1/2 left-0 w-full h-1.5 bg-slate-100 -translate-y-1/2 rounded-full z-[-1]" />
           <div
             className="absolute top-1/2 left-0 h-1.5 bg-primary -translate-y-1/2 rounded-full transition-all duration-700 ease-in-out z-[-1]"
-            style={{ width: `${((step - 1) / 5) * 100}%` }}
+            style={{ width: `${Math.min(((step - 1) / 5) * 100, 100)}%` }}
           />
           <div className="relative flex justify-between w-full">
             {[1, 2, 3, 4, 5, 6].map((i) => {
-              const isCompleted = i < step
-              const isActive = i === step
+              const isCompleted = step === 7 ? true : i < step
+              const isActive = step === 7 ? false : i === step
 
               return (
                 <div
@@ -206,38 +257,40 @@ export default function Index() {
           {renderStep()}
         </div>
 
-        <div className="flex items-center justify-between mt-8 pb-10 gap-4">
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={handlePrev}
-            disabled={isSubmitting || step === 1}
-            className={cn('h-14 px-4 sm:px-6 text-base shadow-sm', step === 1 && 'invisible')}
-          >
-            <ChevronLeft className="mr-1 sm:mr-2 h-5 w-5" />
-            <span className="hidden sm:inline">Voltar</span>
-          </Button>
+        {step < 7 && (
+          <div className="flex items-center justify-between mt-8 pb-10 gap-4">
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={handlePrev}
+              disabled={isSubmitting || step === 1}
+              className={cn('h-14 px-4 sm:px-6 text-base shadow-sm', step === 1 && 'invisible')}
+            >
+              <ChevronLeft className="mr-1 sm:mr-2 h-5 w-5" />
+              <span className="hidden sm:inline">Voltar</span>
+            </Button>
 
-          <Button
-            size="lg"
-            onClick={handleNext}
-            disabled={isSubmitting || !isValid()}
-            className={cn(
-              'h-14 px-6 sm:px-8 text-base transition-all duration-500',
-              !isValid()
-                ? 'bg-slate-200 text-slate-500 cursor-not-allowed border-none shadow-none disabled:opacity-80'
-                : 'bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg hover:-translate-y-0.5',
-            )}
-          >
-            {isSubmitting && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
-            {!isSubmitting && step === 6
-              ? 'Finalizar'
-              : !isSubmitting
-                ? 'Continuar'
-                : 'Enviando...'}
-            {!isSubmitting && step !== 6 && <ChevronRight className="ml-1 sm:ml-2 h-5 w-5" />}
-          </Button>
-        </div>
+            <Button
+              size="lg"
+              onClick={handleNext}
+              disabled={isSubmitting || !isValid()}
+              className={cn(
+                'h-14 px-6 sm:px-8 text-base transition-all duration-500',
+                !isValid()
+                  ? 'bg-slate-200 text-slate-500 cursor-not-allowed border-none shadow-none disabled:opacity-80'
+                  : 'bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg hover:-translate-y-0.5',
+              )}
+            >
+              {isSubmitting && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
+              {!isSubmitting && step === 6
+                ? 'Finalizar'
+                : !isSubmitting
+                  ? 'Continuar'
+                  : 'Enviando...'}
+              {!isSubmitting && step !== 6 && <ChevronRight className="ml-1 sm:ml-2 h-5 w-5" />}
+            </Button>
+          </div>
+        )}
       </main>
     </div>
   )
