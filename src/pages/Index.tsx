@@ -9,8 +9,7 @@ import {
   type FormData,
 } from '@/components/onboarding/Steps'
 import { Button } from '@/components/ui/button'
-import { Progress } from '@/components/ui/progress'
-import { ChevronRight, ChevronLeft, Loader2 } from 'lucide-react'
+import { ChevronRight, ChevronLeft, Loader2, Check } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 import { cn } from '@/lib/utils'
 
@@ -30,14 +29,16 @@ export default function Index() {
   const [step, setStep] = useState(1)
   const [data, setData] = useState<FormData>(initialData)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
   const { toast } = useToast()
 
   useEffect(() => {
-    const saved = localStorage.getItem('adapta_onboarding_data')
-    if (saved) {
+    const savedData = localStorage.getItem('adapta_onboarding_data')
+    const savedStep = localStorage.getItem('adapta_onboarding_step')
+
+    if (savedData) {
       try {
-        const parsed = JSON.parse(saved)
-        // Ensure nested structure is maintained
+        const parsed = JSON.parse(savedData)
         setData({
           ...initialData,
           ...parsed,
@@ -50,108 +51,39 @@ export default function Index() {
         // Handle invalid JSON silently
       }
     }
+
+    if (savedStep) {
+      const stepNum = parseInt(savedStep, 10)
+      if (!isNaN(stepNum) && stepNum >= 1 && stepNum <= 6) {
+        setStep(stepNum)
+      }
+    }
+
+    setIsLoaded(true)
   }, [])
 
   useEffect(() => {
-    localStorage.setItem('adapta_onboarding_data', JSON.stringify(data))
-  }, [data])
+    if (isLoaded) {
+      localStorage.setItem('adapta_onboarding_data', JSON.stringify(data))
+      localStorage.setItem('adapta_onboarding_step', step.toString())
+    }
+  }, [data, step, isLoaded])
 
-  const updateData = (newData: Partial<FormData>) => {
-    setData((prev) => ({ ...prev, ...newData }))
-  }
-
-  const updateAdditionalData = (newAdditional: Partial<FormData['additionalData']>) => {
-    setData((prev) => ({
-      ...prev,
-      additionalData: { ...prev.additionalData, ...newAdditional },
-    }))
-  }
-
-  const validateStep = () => {
+  const isValid = () => {
     const { name, email, vslWatched, portfolio, risk } = data.additionalData
-
     if (step === 1) {
-      if (!name.trim()) {
-        toast({
-          title: 'Campo obrigatório',
-          description: 'O nome é obrigatório.',
-          variant: 'destructive',
-        })
-        return false
-      }
-      if (name.trim().length < 3) {
-        toast({
-          title: 'Nome inválido',
-          description: 'O nome deve ter pelo menos 3 caracteres.',
-          variant: 'destructive',
-        })
-        return false
-      }
-      if (!email.trim()) {
-        toast({
-          title: 'Campo obrigatório',
-          description: 'O e-mail é obrigatório.',
-          variant: 'destructive',
-        })
-        return false
-      }
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-      if (!emailRegex.test(email)) {
-        toast({
-          title: 'E-mail inválido',
-          description: 'Insira um e-mail válido.',
-          variant: 'destructive',
-        })
-        return false
-      }
+      return name.trim().length >= 3 && emailRegex.test(email)
     }
-    if (step === 2 && !vslWatched) {
-      toast({
-        title: 'Atenção',
-        description: 'Assista o vídeo completo para continuar',
-        variant: 'destructive',
-      })
-      return false
-    }
-    if (step === 3 && !data.profession) {
-      toast({
-        title: 'Campo obrigatório',
-        description: 'Selecione sua profissão para continuar',
-        variant: 'destructive',
-      })
-      return false
-    }
-    if (step === 4 && (!data.useCases || data.useCases.length === 0)) {
-      toast({
-        title: 'Campo obrigatório',
-        description: 'Selecione pelo menos um caso de uso',
-        variant: 'destructive',
-      })
-      return false
-    }
-    if (step === 5) {
-      if (!portfolio) {
-        toast({
-          title: 'Campo obrigatório',
-          description: 'Selecione o volume do portfólio',
-          variant: 'destructive',
-        })
-        return false
-      }
-      if (!risk) {
-        toast({
-          title: 'Campo obrigatório',
-          description: 'Selecione seu perfil de risco',
-          variant: 'destructive',
-        })
-        return false
-      }
-    }
+    if (step === 2) return vslWatched
+    if (step === 3) return !!data.profession
+    if (step === 4) return data.useCases && data.useCases.length > 0
+    if (step === 5) return !!portfolio && !!risk
     return true
   }
 
   const handleNext = async () => {
-    if (!validateStep()) return
+    if (!isValid()) return
 
     if (step < 6) {
       setStep((s) => s + 1)
@@ -161,12 +93,8 @@ export default function Index() {
       try {
         await new Promise((resolve, reject) => {
           setTimeout(() => {
-            // Simulated 10% chance of failure for realistic error handling
-            if (Math.random() > 0.9) {
-              reject(new Error('Network error'))
-            } else {
-              resolve(true)
-            }
+            if (Math.random() > 0.9) reject(new Error('Network error'))
+            else resolve(true)
           }, 1500)
         })
 
@@ -176,6 +104,7 @@ export default function Index() {
           className: 'bg-green-50 border-green-200 text-green-800',
         })
         localStorage.removeItem('adapta_onboarding_data')
+        localStorage.removeItem('adapta_onboarding_step')
         localStorage.removeItem('adapta_vsl_progress')
         setData(initialData)
         setStep(1)
@@ -200,7 +129,12 @@ export default function Index() {
   }
 
   const renderStep = () => {
-    const props = { data, updateData, updateAdditionalData }
+    const props = {
+      data,
+      updateData: (d: Partial<FormData>) => setData((p) => ({ ...p, ...d })),
+      updateAdditionalData: (d: Partial<FormData['additionalData']>) =>
+        setData((p) => ({ ...p, additionalData: { ...p.additionalData, ...d } })),
+    }
     switch (step) {
       case 1:
         return <Step1 {...props} />
@@ -219,15 +153,51 @@ export default function Index() {
     }
   }
 
+  if (!isLoaded) return null
+
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
       <header className="w-full bg-white border-b border-slate-200 py-4 px-6 sticky top-0 z-10">
-        <div className="max-w-3xl mx-auto flex items-center justify-between">
+        <div className="max-w-3xl mx-auto flex items-center justify-between mb-4">
           <div className="font-bold text-xl text-primary tracking-tight">Adapta Elite</div>
-          <div className="text-sm font-medium text-slate-500">Etapa {step} de 6</div>
+          <div className="text-sm font-medium text-slate-500">
+            Etapa {step} de 6{' '}
+            <span className="ml-1 text-slate-400">({Math.round((step / 6) * 100)}%)</span>
+          </div>
         </div>
-        <div className="max-w-3xl mx-auto mt-4">
-          <Progress value={(step / 6) * 100} className="h-2" />
+
+        <div className="max-w-3xl mx-auto relative z-0 mt-2">
+          <div className="absolute top-1/2 left-0 w-full h-1.5 bg-slate-100 -translate-y-1/2 rounded-full z-[-1]" />
+          <div
+            className="absolute top-1/2 left-0 h-1.5 bg-primary -translate-y-1/2 rounded-full transition-all duration-700 ease-in-out z-[-1]"
+            style={{ width: `${((step - 1) / 5) * 100}%` }}
+          />
+          <div className="relative flex justify-between w-full">
+            {[1, 2, 3, 4, 5, 6].map((i) => {
+              const isCompleted = i < step
+              const isActive = i === step
+
+              return (
+                <div
+                  key={i}
+                  className={cn(
+                    'w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm sm:text-base font-semibold transition-all duration-500',
+                    isActive
+                      ? 'bg-primary text-primary-foreground ring-4 ring-primary/20 scale-110 shadow-md'
+                      : isCompleted
+                        ? 'bg-primary text-primary-foreground scale-100'
+                        : 'bg-slate-200 text-slate-500 opacity-60 scale-95',
+                  )}
+                >
+                  {isCompleted ? (
+                    <Check className="w-4 h-4 sm:w-5 sm:h-5 animate-in zoom-in duration-300" />
+                  ) : (
+                    i
+                  )}
+                </div>
+              )
+            })}
+          </div>
         </div>
       </header>
 
@@ -236,26 +206,26 @@ export default function Index() {
           {renderStep()}
         </div>
 
-        <div className="flex items-center justify-between mt-8 pb-10">
+        <div className="flex items-center justify-between mt-8 pb-10 gap-4">
           <Button
             variant="outline"
             size="lg"
             onClick={handlePrev}
-            disabled={isSubmitting}
-            className={cn('h-14 px-6 text-base shadow-sm', step === 1 && 'invisible')}
+            disabled={isSubmitting || step === 1}
+            className={cn('h-14 px-4 sm:px-6 text-base shadow-sm', step === 1 && 'invisible')}
           >
-            <ChevronLeft className="mr-2 h-5 w-5" />
-            Voltar
+            <ChevronLeft className="mr-1 sm:mr-2 h-5 w-5" />
+            <span className="hidden sm:inline">Voltar</span>
           </Button>
 
           <Button
             size="lg"
             onClick={handleNext}
-            disabled={isSubmitting}
+            disabled={isSubmitting || !isValid()}
             className={cn(
-              'h-14 px-8 text-base transition-all duration-500',
-              step === 2 && !data.additionalData.vslWatched
-                ? 'bg-slate-200 text-slate-500 hover:bg-slate-300 shadow-none border border-slate-300'
+              'h-14 px-6 sm:px-8 text-base transition-all duration-500',
+              !isValid()
+                ? 'bg-slate-200 text-slate-500 cursor-not-allowed border-none shadow-none disabled:opacity-80'
                 : 'bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg hover:-translate-y-0.5',
             )}
           >
@@ -265,7 +235,7 @@ export default function Index() {
               : !isSubmitting
                 ? 'Continuar'
                 : 'Enviando...'}
-            {!isSubmitting && step !== 6 && <ChevronRight className="ml-2 h-5 w-5" />}
+            {!isSubmitting && step !== 6 && <ChevronRight className="ml-1 sm:ml-2 h-5 w-5" />}
           </Button>
         </div>
       </main>

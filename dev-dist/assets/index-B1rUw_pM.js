@@ -17624,7 +17624,7 @@ var require_react_jsx_runtime_development = /* @__PURE__ */ __commonJSMin(((expo
 var import_jsx_runtime = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((exports, module) => {
 	module.exports = require_react_jsx_runtime_development();
 })))(), 1);
-function createContextScope$1(scopeName, createContextScopeDeps = []) {
+function createContextScope(scopeName, createContextScopeDeps = []) {
 	let defaultContexts = [];
 	function createContext3(rootComponentName, defaultContext) {
 		const BaseContext = import_react.createContext(defaultContext);
@@ -17662,9 +17662,9 @@ function createContextScope$1(scopeName, createContextScopeDeps = []) {
 		};
 	};
 	createScope.scopeName = scopeName;
-	return [createContext3, composeContextScopes$1(createScope, ...createContextScopeDeps)];
+	return [createContext3, composeContextScopes(createScope, ...createContextScopeDeps)];
 }
-function composeContextScopes$1(...scopes) {
+function composeContextScopes(...scopes) {
 	const baseScope = scopes[0];
 	if (scopes.length === 1) return baseScope;
 	const createScope = () => {
@@ -17778,7 +17778,7 @@ function getElementRef$2(element) {
 }
 function createCollection(name) {
 	const PROVIDER_NAME$2 = name + "CollectionProvider";
-	const [createCollectionContext, createCollectionScope$2] = createContextScope$1(PROVIDER_NAME$2);
+	const [createCollectionContext, createCollectionScope$2] = createContextScope(PROVIDER_NAME$2);
 	const [CollectionProviderImpl, useCollectionContext] = createCollectionContext(PROVIDER_NAME$2, {
 		collectionRef: { current: null },
 		itemMap: /* @__PURE__ */ new Map()
@@ -17846,7 +17846,7 @@ function createCollection(name) {
 		createCollectionScope$2
 	];
 }
-var Primitive$1 = [
+var Primitive = [
 	"a",
 	"button",
 	"div",
@@ -17980,7 +17980,7 @@ var DismissableLayer = import_react.forwardRef((props, forwardedRef) => {
 		document.addEventListener(CONTEXT_UPDATE, handleUpdate);
 		return () => document.removeEventListener(CONTEXT_UPDATE, handleUpdate);
 	}, []);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
 		...layerProps,
 		ref: composedRefs,
 		style: {
@@ -18007,7 +18007,7 @@ var DismissableLayerBranch = import_react.forwardRef((props, forwardedRef) => {
 			};
 		}
 	}, [context.branches]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
 		...props,
 		ref: composedRefs
 	});
@@ -18073,7 +18073,7 @@ function handleAndDispatchCustomEvent$1(name, handler, detail, { discrete }) {
 	if (discrete) dispatchDiscreteCustomEvent(target, event);
 	else target.dispatchEvent(event);
 }
-var Root$6 = DismissableLayer;
+var Root$5 = DismissableLayer;
 var Branch = DismissableLayerBranch;
 var useLayoutEffect2 = globalThis?.document ? import_react.useLayoutEffect : () => {};
 var import_react_dom$4 = /* @__PURE__ */ __toESM(require_react_dom(), 1);
@@ -18083,7 +18083,7 @@ var Portal = import_react.forwardRef((props, forwardedRef) => {
 	const [mounted, setMounted] = import_react.useState(false);
 	useLayoutEffect2(() => setMounted(true), []);
 	const container = containerProp || mounted && globalThis?.document?.body;
-	return container ? import_react_dom$4.createPortal(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+	return container ? import_react_dom$4.createPortal(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
 		...portalProps,
 		ref: forwardedRef
 	}), container) : null;
@@ -18254,7 +18254,7 @@ var VISUALLY_HIDDEN_STYLES = Object.freeze({
 });
 var NAME$3 = "VisuallyHidden";
 var VisuallyHidden = import_react.forwardRef((props, forwardedRef) => {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.span, {
 		...props,
 		ref: forwardedRef,
 		style: {
@@ -18264,11 +18264,11 @@ var VisuallyHidden = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 VisuallyHidden.displayName = NAME$3;
-var Root$5 = VisuallyHidden;
+var Root$4 = VisuallyHidden;
 var import_react_dom$3 = /* @__PURE__ */ __toESM(require_react_dom(), 1);
 var PROVIDER_NAME$1 = "ToastProvider";
 var [Collection$1, useCollection$1, createCollectionScope$1] = createCollection("Toast");
-var [createToastContext, createToastScope] = createContextScope$1("Toast", [createCollectionScope$1]);
+var [createToastContext, createToastScope] = createContextScope("Toast", [createCollectionScope$1]);
 var [ToastProviderProvider, useToastProviderContext] = createToastContext(PROVIDER_NAME$1);
 var ToastProvider$1 = (props) => {
 	const { __scopeToast, label = "Notification", duration = 5e3, swipeDirection = "right", swipeThreshold = 50, children } = props;
@@ -18404,7 +18404,7 @@ var ToastViewport$1 = import_react.forwardRef((props, forwardedRef) => {
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection$1.Slot, {
 				scope: __scopeToast,
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.ol, {
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.ol, {
 					tabIndex: -1,
 					...viewportProps,
 					ref: composedRefs
@@ -18563,13 +18563,13 @@ var ToastImpl = import_react.forwardRef((props, forwardedRef) => {
 		onClose: handleClose,
 		children: import_react_dom$3.createPortal(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection$1.ItemSlot, {
 			scope: __scopeToast,
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$6, {
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$5, {
 				asChild: true,
 				onEscapeKeyDown: composeEventHandlers(onEscapeKeyDown, () => {
 					if (!context.isFocusedToastEscapeKeyDownRef.current) handleClose();
 					context.isFocusedToastEscapeKeyDownRef.current = false;
 				}),
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.li, {
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.li, {
 					tabIndex: 0,
 					"data-state": open ? "open" : "closed",
 					"data-swipe-direction": context.swipeDirection,
@@ -18669,7 +18669,7 @@ var ToastAnnounce = (props) => {
 var TITLE_NAME = "ToastTitle";
 var ToastTitle$1 = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeToast, ...titleProps } = props;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
 		...titleProps,
 		ref: forwardedRef
 	});
@@ -18678,7 +18678,7 @@ ToastTitle$1.displayName = TITLE_NAME;
 var DESCRIPTION_NAME = "ToastDescription";
 var ToastDescription$1 = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeToast, ...descriptionProps } = props;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
 		...descriptionProps,
 		ref: forwardedRef
 	});
@@ -18707,7 +18707,7 @@ var ToastClose$1 = import_react.forwardRef((props, forwardedRef) => {
 	const interactiveContext = useToastInteractiveContext(CLOSE_NAME, __scopeToast);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ToastAnnounceExclude, {
 		asChild: true,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.button, {
 			type: "button",
 			...closeProps,
 			ref: forwardedRef,
@@ -18718,7 +18718,7 @@ var ToastClose$1 = import_react.forwardRef((props, forwardedRef) => {
 ToastClose$1.displayName = CLOSE_NAME;
 var ToastAnnounceExclude = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeToast, altText, ...announceExcludeProps } = props;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
 		"data-radix-toast-announce-exclude": "",
 		"data-radix-toast-announce-alt": altText || void 0,
 		...announceExcludeProps,
@@ -18941,6 +18941,10 @@ var createLucideIcon = (iconName, iconNode) => {
 	Component.displayName = toPascalCase(iconName);
 	return Component;
 };
+var Check = createLucideIcon("check", [["path", {
+	d: "M20 6 9 17l-5-5",
+	key: "1gmf2c"
+}]]);
 var ChevronLeft = createLucideIcon("chevron-left", [["path", {
 	d: "m15 18-6-6 6-6",
 	key: "1wnfg3"
@@ -19284,12 +19288,12 @@ var lengthUnitRegex = /\d+(%|px|r?em|[sdl]?v([hwib]|min|max)|pt|pc|in|cm|mm|cap|
 var colorFunctionRegex = /^(rgba?|hsla?|hwb|(ok)?(lab|lch)|color-mix)\(.+\)$/;
 var shadowRegex = /^(inset_)?-?((\d+)?\.?(\d+)[a-z]+|0)_-?((\d+)?\.?(\d+)[a-z]+|0)/;
 var imageRegex = /^(url|image|image-set|cross-fade|element|(repeating-)?(linear|radial|conic)-gradient)\(.+\)$/;
-var isLength = (value) => isNumber$1(value) || stringLengths.has(value) || fractionRegex.test(value);
+var isLength = (value) => isNumber(value) || stringLengths.has(value) || fractionRegex.test(value);
 var isArbitraryLength = (value) => getIsArbitraryValue(value, "length", isLengthOnly);
-var isNumber$1 = (value) => Boolean(value) && !Number.isNaN(Number(value));
-var isArbitraryNumber = (value) => getIsArbitraryValue(value, "number", isNumber$1);
+var isNumber = (value) => Boolean(value) && !Number.isNaN(Number(value));
+var isArbitraryNumber = (value) => getIsArbitraryValue(value, "number", isNumber);
 var isInteger = (value) => Boolean(value) && Number.isInteger(Number(value));
-var isPercent = (value) => value.endsWith("%") && isNumber$1(value.slice(0, -1));
+var isPercent = (value) => value.endsWith("%") && isNumber(value.slice(0, -1));
 var isArbitraryValue = (value) => arbitraryValueRegex.test(value);
 var isTshirtSize = (value) => tshirtUnitRegex.test(value);
 var sizeLabels = /* @__PURE__ */ new Set([
@@ -19366,7 +19370,7 @@ var getDefaultConfig = () => {
 	];
 	const getNumberWithAutoAndArbitrary = () => [
 		"auto",
-		isNumber$1,
+		isNumber,
 		isArbitraryValue
 	];
 	const getPositions = () => [
@@ -19429,7 +19433,7 @@ var getDefaultConfig = () => {
 		"right",
 		"column"
 	];
-	const getNumberAndArbitrary = () => [isNumber$1, isArbitraryValue];
+	const getNumberAndArbitrary = () => [isNumber, isArbitraryValue];
 	return {
 		cacheSize: 500,
 		separator: ":",
@@ -19818,7 +19822,7 @@ var getDefaultConfig = () => {
 			] }],
 			"line-clamp": [{ "line-clamp": [
 				"none",
-				isNumber$1,
+				isNumber,
 				isArbitraryNumber
 			] }],
 			leading: [{ leading: [
@@ -20824,10 +20828,10 @@ var Observer = class {
 			if (typeof id !== "string" && typeof id !== "number") return { unwrap };
 			else return Object.assign(id, { unwrap });
 		};
-		this.custom = (jsx$20, data) => {
+		this.custom = (jsx$18, data) => {
 			const id = (data == null ? void 0 : data.id) || toastsCounter++;
 			this.create({
-				jsx: jsx$20(id),
+				jsx: jsx$18(id),
 				id,
 				...data
 			});
@@ -22958,7 +22962,7 @@ var arrow = (options, deps) => ({
 var NAME$2 = "Arrow";
 var Arrow$1 = import_react.forwardRef((props, forwardedRef) => {
 	const { children, width = 10, height = 5, ...arrowProps } = props;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.svg, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.svg, {
 		...arrowProps,
 		ref: forwardedRef,
 		width,
@@ -22969,7 +22973,7 @@ var Arrow$1 = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 Arrow$1.displayName = NAME$2;
-var Root$4 = Arrow$1;
+var Root$3 = Arrow$1;
 function useSize(element) {
 	const [size$3, setSize] = import_react.useState(void 0);
 	useLayoutEffect2(() => {
@@ -23005,7 +23009,7 @@ function useSize(element) {
 	return size$3;
 }
 var POPPER_NAME = "Popper";
-var [createPopperContext, createPopperScope] = createContextScope$1(POPPER_NAME);
+var [createPopperContext, createPopperScope] = createContextScope(POPPER_NAME);
 var [PopperProvider, usePopperContext] = createPopperContext(POPPER_NAME);
 var Popper = (props) => {
 	const { __scopePopper, children } = props;
@@ -23030,7 +23034,7 @@ var PopperAnchor = import_react.forwardRef((props, forwardedRef) => {
 		anchorRef.current = virtualRef?.current || ref.current;
 		if (previousAnchor !== anchorRef.current) context.onAnchorChange(anchorRef.current);
 	});
-	return virtualRef ? null : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+	return virtualRef ? null : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
 		...anchorProps,
 		ref: composedRefs
 	});
@@ -23140,7 +23144,7 @@ var PopperContent = import_react.forwardRef((props, forwardedRef) => {
 			arrowX,
 			arrowY,
 			shouldHideArrow: cannotCenterArrow,
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
 				"data-side": placedSide,
 				"data-align": placedAlign,
 				...contentProps,
@@ -23186,7 +23190,7 @@ var PopperArrow = import_react.forwardRef(function PopperArrow2(props, forwarded
 			}[contentContext.placedSide],
 			visibility: contentContext.shouldHideArrow ? "hidden" : void 0
 		},
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$4, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$3, {
 			...arrowProps,
 			ref: forwardedRef,
 			style: {
@@ -23245,7 +23249,7 @@ var Root2$1 = Popper;
 var Anchor = PopperAnchor;
 var Content = PopperContent;
 var Arrow = PopperArrow;
-var [createTooltipContext, createTooltipScope] = createContextScope$1("Tooltip", [createPopperScope]);
+var [createTooltipContext, createTooltipScope] = createContextScope("Tooltip", [createPopperScope]);
 var usePopperScope = createPopperScope();
 var PROVIDER_NAME = "TooltipProvider";
 var DEFAULT_DELAY_DURATION = 700;
@@ -23383,7 +23387,7 @@ var TooltipTrigger$1 = import_react.forwardRef((props, forwardedRef) => {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Anchor, {
 		asChild: true,
 		...popperScope,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.button, {
 			"aria-describedby": context.open ? context.contentId : void 0,
 			"data-state": context.stateAttribute,
 			...triggerProps,
@@ -23568,7 +23572,7 @@ var TooltipContentImpl = import_react.forwardRef((props, forwardedRef) => {
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Slottable, { children }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(VisuallyHiddenContentContextProvider, {
 				scope: __scopeTooltip,
 				isInside: true,
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$5, {
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$4, {
 					id: context.contentId,
 					role: "tooltip",
 					children: ariaLabel || children
@@ -23964,7 +23968,7 @@ function getElementRef(element) {
 	return element.props.ref || element.ref;
 }
 require_react_dom();
-var Primitive = [
+var Primitive$1 = [
 	"a",
 	"button",
 	"div",
@@ -24001,7 +24005,7 @@ var Primitive = [
 }, {});
 var NAME$1 = "Label";
 var Label$1 = import_react.forwardRef((props, forwardedRef) => {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.label, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.label, {
 		...props,
 		ref: forwardedRef,
 		onMouseDown: (event) => {
@@ -24012,16 +24016,16 @@ var Label$1 = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 Label$1.displayName = NAME$1;
-var Root$3 = Label$1;
+var Root$2 = Label$1;
 var labelVariants = cva("text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70");
-var Label = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$3, {
+var Label = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$2, {
 	"data-uid": "src/components/ui/label.tsx:16:3",
 	"data-prohibitions": "[editContent]",
 	ref,
 	className: cn(labelVariants(), className),
 	...props
 }));
-Label.displayName = Root$3.displayName;
+Label.displayName = Root$2.displayName;
 var alertVariants = cva("relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground", {
 	variants: { variant: {
 		default: "bg-background text-foreground",
@@ -24064,7 +24068,7 @@ var AspectRatio$1 = import_react.forwardRef((props, forwardedRef) => {
 			paddingBottom: `${100 / ratio}%`
 		},
 		"data-radix-aspect-ratio-wrapper": "",
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
 			...aspectRatioProps,
 			ref: forwardedRef,
 			style: {
@@ -24174,7 +24178,7 @@ var EVENT_OPTIONS = {
 };
 var GROUP_NAME = "RovingFocusGroup";
 var [Collection, useCollection, createCollectionScope] = createCollection(GROUP_NAME);
-var [createRovingFocusGroupContext, createRovingFocusGroupScope] = createContextScope$1(GROUP_NAME, [createCollectionScope]);
+var [createRovingFocusGroupContext, createRovingFocusGroupScope] = createContextScope(GROUP_NAME, [createCollectionScope]);
 var [RovingFocusProvider, useRovingFocusContext] = createRovingFocusGroupContext(GROUP_NAME);
 var RovingFocusGroup = import_react.forwardRef((props, forwardedRef) => {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection.Provider, {
@@ -24222,7 +24226,7 @@ var RovingFocusGroupImpl = import_react.forwardRef((props, forwardedRef) => {
 		onItemShiftTab: import_react.useCallback(() => setIsTabbingBackOut(true), []),
 		onFocusableItemAdd: import_react.useCallback(() => setFocusableItemsCount((prevCount) => prevCount + 1), []),
 		onFocusableItemRemove: import_react.useCallback(() => setFocusableItemsCount((prevCount) => prevCount - 1), []),
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
 			tabIndex: isTabbingBackOut || focusableItemsCount === 0 ? -1 : 0,
 			"data-orientation": orientation,
 			...groupProps,
@@ -24278,7 +24282,7 @@ var RovingFocusGroupItem = import_react.forwardRef((props, forwardedRef) => {
 		id,
 		focusable,
 		active,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.span, {
 			tabIndex: isCurrentTabStop ? 0 : -1,
 			"data-orientation": context.orientation,
 			...itemProps,
@@ -24347,7 +24351,7 @@ function focusFirst(candidates, preventScroll = false) {
 function wrapArray(array, startIndex) {
 	return array.map((_$1, index$1) => array[(startIndex + index$1) % array.length]);
 }
-var Root$1 = RovingFocusGroup;
+var Root = RovingFocusGroup;
 var Item = RovingFocusGroupItem;
 function usePrevious(value) {
 	const ref = import_react.useRef({
@@ -24363,7 +24367,7 @@ function usePrevious(value) {
 	}, [value]);
 }
 var RADIO_NAME = "Radio";
-var [createRadioContext, createRadioScope] = createContextScope$1(RADIO_NAME);
+var [createRadioContext, createRadioScope] = createContextScope(RADIO_NAME);
 var [RadioProvider, useRadioContext] = createRadioContext(RADIO_NAME);
 var Radio = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeRadio, name, checked = false, required, disabled, value = "on", onCheck, form, ...radioProps } = props;
@@ -24375,7 +24379,7 @@ var Radio = import_react.forwardRef((props, forwardedRef) => {
 		scope: __scopeRadio,
 		checked,
 		disabled,
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.button, {
 			type: "button",
 			role: "radio",
 			"aria-checked": checked,
@@ -24406,13 +24410,13 @@ var Radio = import_react.forwardRef((props, forwardedRef) => {
 	});
 });
 Radio.displayName = RADIO_NAME;
-var INDICATOR_NAME$1 = "RadioIndicator";
+var INDICATOR_NAME = "RadioIndicator";
 var RadioIndicator = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeRadio, forceMount, ...indicatorProps } = props;
-	const context = useRadioContext(INDICATOR_NAME$1, __scopeRadio);
+	const context = useRadioContext(INDICATOR_NAME, __scopeRadio);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
 		present: forceMount || context.checked,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.span, {
 			"data-state": getState(context.checked),
 			"data-disabled": context.disabled ? "" : void 0,
 			...indicatorProps,
@@ -24420,7 +24424,7 @@ var RadioIndicator = import_react.forwardRef((props, forwardedRef) => {
 		})
 	});
 });
-RadioIndicator.displayName = INDICATOR_NAME$1;
+RadioIndicator.displayName = INDICATOR_NAME;
 var BUBBLE_INPUT_NAME = "RadioBubbleInput";
 var RadioBubbleInput = import_react.forwardRef(({ __scopeRadio, control, checked, bubbles = true, ...props }, forwardedRef) => {
 	const ref = import_react.useRef(null);
@@ -24442,7 +24446,7 @@ var RadioBubbleInput = import_react.forwardRef(({ __scopeRadio, control, checked
 		checked,
 		bubbles
 	]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.input, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.input, {
 		type: "radio",
 		"aria-hidden": true,
 		defaultChecked: checked,
@@ -24470,7 +24474,7 @@ var ARROW_KEYS = [
 	"ArrowRight"
 ];
 var RADIO_GROUP_NAME = "RadioGroup";
-var [createRadioGroupContext, createRadioGroupScope] = createContextScope$1(RADIO_GROUP_NAME, [createRovingFocusGroupScope, createRadioScope]);
+var [createRadioGroupContext, createRadioGroupScope] = createContextScope(RADIO_GROUP_NAME, [createRovingFocusGroupScope, createRadioScope]);
 var useRovingFocusGroupScope = createRovingFocusGroupScope();
 var useRadioScope = createRadioScope();
 var [RadioGroupProvider, useRadioGroupContext] = createRadioGroupContext(RADIO_GROUP_NAME);
@@ -24491,13 +24495,13 @@ var RadioGroup$1 = import_react.forwardRef((props, forwardedRef) => {
 		disabled,
 		value,
 		onValueChange: setValue,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$1, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root, {
 			asChild: true,
 			...rovingFocusGroupScope,
 			orientation,
 			dir: direction,
 			loop,
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
 				role: "radiogroup",
 				"aria-required": required,
 				"aria-orientation": orientation,
@@ -24569,7 +24573,7 @@ var RadioGroupIndicator = import_react.forwardRef((props, forwardedRef) => {
 RadioGroupIndicator.displayName = INDICATOR_NAME2;
 var Root2 = RadioGroup$1;
 var Item2 = RadioGroupItem$1;
-var Indicator$1 = RadioGroupIndicator;
+var Indicator = RadioGroupIndicator;
 var RadioGroup = import_react.forwardRef(({ className, ...props }, ref) => {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root2, {
 		"data-uid": "src/components/ui/radio-group.tsx:12:10",
@@ -24587,7 +24591,7 @@ var RadioGroupItem = import_react.forwardRef(({ className, ...props }, ref) => {
 		ref,
 		className: cn("aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50", className),
 		...props,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Indicator$1, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Indicator, {
 			"data-uid": "src/components/ui/radio-group.tsx:29:7",
 			"data-prohibitions": "[]",
 			className: "flex items-center justify-center",
@@ -25101,154 +25105,6 @@ var Button = import_react.forwardRef(({ className, variant, size: size$3, asChil
 	});
 });
 Button.displayName = "Button";
-function createContextScope(scopeName, createContextScopeDeps = []) {
-	let defaultContexts = [];
-	function createContext3(rootComponentName, defaultContext) {
-		const BaseContext = import_react.createContext(defaultContext);
-		BaseContext.displayName = rootComponentName + "Context";
-		const index$1 = defaultContexts.length;
-		defaultContexts = [...defaultContexts, defaultContext];
-		const Provider$2 = (props) => {
-			const { scope, children, ...context } = props;
-			const Context = scope?.[scopeName]?.[index$1] || BaseContext;
-			const value = import_react.useMemo(() => context, Object.values(context));
-			return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Context.Provider, {
-				value,
-				children
-			});
-		};
-		Provider$2.displayName = rootComponentName + "Provider";
-		function useContext2(consumerName, scope) {
-			const Context = scope?.[scopeName]?.[index$1] || BaseContext;
-			const context = import_react.useContext(Context);
-			if (context) return context;
-			if (defaultContext !== void 0) return defaultContext;
-			throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
-		}
-		return [Provider$2, useContext2];
-	}
-	const createScope = () => {
-		const scopeContexts = defaultContexts.map((defaultContext) => {
-			return import_react.createContext(defaultContext);
-		});
-		return function useScope(scope) {
-			const contexts = scope?.[scopeName] || scopeContexts;
-			return import_react.useMemo(() => ({ [`__scope${scopeName}`]: {
-				...scope,
-				[scopeName]: contexts
-			} }), [scope, contexts]);
-		};
-	};
-	createScope.scopeName = scopeName;
-	return [createContext3, composeContextScopes(createScope, ...createContextScopeDeps)];
-}
-function composeContextScopes(...scopes) {
-	const baseScope = scopes[0];
-	if (scopes.length === 1) return baseScope;
-	const createScope = () => {
-		const scopeHooks = scopes.map((createScope2) => ({
-			useScope: createScope2(),
-			scopeName: createScope2.scopeName
-		}));
-		return function useComposedScopes(overrideScopes) {
-			const nextScopes = scopeHooks.reduce((nextScopes2, { useScope, scopeName }) => {
-				const currentScope = useScope(overrideScopes)[`__scope${scopeName}`];
-				return {
-					...nextScopes2,
-					...currentScope
-				};
-			}, {});
-			return import_react.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
-		};
-	};
-	createScope.scopeName = baseScope.scopeName;
-	return createScope;
-}
-var PROGRESS_NAME = "Progress";
-var DEFAULT_MAX = 100;
-var [createProgressContext, createProgressScope] = createContextScope(PROGRESS_NAME);
-var [ProgressProvider, useProgressContext] = createProgressContext(PROGRESS_NAME);
-var Progress$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeProgress, value: valueProp = null, max: maxProp, getValueLabel = defaultGetValueLabel, ...progressProps } = props;
-	if ((maxProp || maxProp === 0) && !isValidMaxNumber(maxProp)) console.error(getInvalidMaxError(`${maxProp}`, "Progress"));
-	const max$1 = isValidMaxNumber(maxProp) ? maxProp : DEFAULT_MAX;
-	if (valueProp !== null && !isValidValueNumber(valueProp, max$1)) console.error(getInvalidValueError(`${valueProp}`, "Progress"));
-	const value = isValidValueNumber(valueProp, max$1) ? valueProp : null;
-	const valueLabel = isNumber(value) ? getValueLabel(value, max$1) : void 0;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProgressProvider, {
-		scope: __scopeProgress,
-		value,
-		max: max$1,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
-			"aria-valuemax": max$1,
-			"aria-valuemin": 0,
-			"aria-valuenow": isNumber(value) ? value : void 0,
-			"aria-valuetext": valueLabel,
-			role: "progressbar",
-			"data-state": getProgressState(value, max$1),
-			"data-value": value ?? void 0,
-			"data-max": max$1,
-			...progressProps,
-			ref: forwardedRef
-		})
-	});
-});
-Progress$1.displayName = PROGRESS_NAME;
-var INDICATOR_NAME = "ProgressIndicator";
-var ProgressIndicator = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeProgress, ...indicatorProps } = props;
-	const context = useProgressContext(INDICATOR_NAME, __scopeProgress);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
-		"data-state": getProgressState(context.value, context.max),
-		"data-value": context.value ?? void 0,
-		"data-max": context.max,
-		...indicatorProps,
-		ref: forwardedRef
-	});
-});
-ProgressIndicator.displayName = INDICATOR_NAME;
-function defaultGetValueLabel(value, max$1) {
-	return `${Math.round(value / max$1 * 100)}%`;
-}
-function getProgressState(value, maxValue) {
-	return value == null ? "indeterminate" : value === maxValue ? "complete" : "loading";
-}
-function isNumber(value) {
-	return typeof value === "number";
-}
-function isValidMaxNumber(max$1) {
-	return isNumber(max$1) && !isNaN(max$1) && max$1 > 0;
-}
-function isValidValueNumber(value, max$1) {
-	return isNumber(value) && !isNaN(value) && value <= max$1 && value >= 0;
-}
-function getInvalidMaxError(propValue, componentName) {
-	return `Invalid prop \`max\` of value \`${propValue}\` supplied to \`${componentName}\`. Only numbers greater than 0 are valid max values. Defaulting to \`${DEFAULT_MAX}\`.`;
-}
-function getInvalidValueError(propValue, componentName) {
-	return `Invalid prop \`value\` of value \`${propValue}\` supplied to \`${componentName}\`. The \`value\` prop must be:
-  - a positive number
-  - less than the value passed to \`max\` (or ${DEFAULT_MAX} if no \`max\` prop is set)
-  - \`null\` or \`undefined\` if the progress is indeterminate.
-
-Defaulting to \`null\`.`;
-}
-var Root = Progress$1;
-var Indicator = ProgressIndicator;
-var Progress = import_react.forwardRef(({ className, value, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root, {
-	"data-uid": "src/components/ui/progress.tsx:11:3",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn("relative h-4 w-full overflow-hidden rounded-full bg-secondary", className),
-	...props,
-	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Indicator, {
-		"data-uid": "src/components/ui/progress.tsx:16:5",
-		"data-prohibitions": "[editContent]",
-		className: "h-full w-full flex-1 bg-primary transition-all",
-		style: { transform: `translateX(-${100 - (value || 0)}%)` }
-	})
-}));
-Progress.displayName = Root.displayName;
 var initialData = {
 	profession: "",
 	useCases: [],
@@ -25264,11 +25120,13 @@ function Index() {
 	const [step, setStep] = (0, import_react.useState)(1);
 	const [data, setData] = (0, import_react.useState)(initialData);
 	const [isSubmitting, setIsSubmitting] = (0, import_react.useState)(false);
+	const [isLoaded, setIsLoaded] = (0, import_react.useState)(false);
 	const { toast: toast$2 } = useToast();
 	(0, import_react.useEffect)(() => {
-		const saved = localStorage.getItem("adapta_onboarding_data");
-		if (saved) try {
-			const parsed = JSON.parse(saved);
+		const savedData = localStorage.getItem("adapta_onboarding_data");
+		const savedStep = localStorage.getItem("adapta_onboarding_step");
+		if (savedData) try {
+			const parsed = JSON.parse(savedData);
 			setData({
 				...initialData,
 				...parsed,
@@ -25278,107 +25136,33 @@ function Index() {
 				}
 			});
 		} catch (e) {}
+		if (savedStep) {
+			const stepNum = parseInt(savedStep, 10);
+			if (!isNaN(stepNum) && stepNum >= 1 && stepNum <= 6) setStep(stepNum);
+		}
+		setIsLoaded(true);
 	}, []);
 	(0, import_react.useEffect)(() => {
-		localStorage.setItem("adapta_onboarding_data", JSON.stringify(data));
-	}, [data]);
-	const updateData = (newData) => {
-		setData((prev) => ({
-			...prev,
-			...newData
-		}));
-	};
-	const updateAdditionalData = (newAdditional) => {
-		setData((prev) => ({
-			...prev,
-			additionalData: {
-				...prev.additionalData,
-				...newAdditional
-			}
-		}));
-	};
-	const validateStep = () => {
+		if (isLoaded) {
+			localStorage.setItem("adapta_onboarding_data", JSON.stringify(data));
+			localStorage.setItem("adapta_onboarding_step", step.toString());
+		}
+	}, [
+		data,
+		step,
+		isLoaded
+	]);
+	const isValid = () => {
 		const { name, email, vslWatched, portfolio, risk } = data.additionalData;
-		if (step === 1) {
-			if (!name.trim()) {
-				toast$2({
-					title: "Campo obrigatório",
-					description: "O nome é obrigatório.",
-					variant: "destructive"
-				});
-				return false;
-			}
-			if (name.trim().length < 3) {
-				toast$2({
-					title: "Nome inválido",
-					description: "O nome deve ter pelo menos 3 caracteres.",
-					variant: "destructive"
-				});
-				return false;
-			}
-			if (!email.trim()) {
-				toast$2({
-					title: "Campo obrigatório",
-					description: "O e-mail é obrigatório.",
-					variant: "destructive"
-				});
-				return false;
-			}
-			if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-				toast$2({
-					title: "E-mail inválido",
-					description: "Insira um e-mail válido.",
-					variant: "destructive"
-				});
-				return false;
-			}
-		}
-		if (step === 2 && !vslWatched) {
-			toast$2({
-				title: "Atenção",
-				description: "Assista o vídeo completo para continuar",
-				variant: "destructive"
-			});
-			return false;
-		}
-		if (step === 3 && !data.profession) {
-			toast$2({
-				title: "Campo obrigatório",
-				description: "Selecione sua profissão para continuar",
-				variant: "destructive"
-			});
-			return false;
-		}
-		if (step === 4 && (!data.useCases || data.useCases.length === 0)) {
-			toast$2({
-				title: "Campo obrigatório",
-				description: "Selecione pelo menos um caso de uso",
-				variant: "destructive"
-			});
-			return false;
-		}
-		if (step === 5) {
-			if (!portfolio) {
-				toast$2({
-					title: "Campo obrigatório",
-					description: "Selecione o volume do portfólio",
-					variant: "destructive"
-				});
-				return false;
-			}
-			if (!risk) {
-				toast$2({
-					title: "Campo obrigatório",
-					description: "Selecione seu perfil de risco",
-					variant: "destructive"
-				});
-				return false;
-			}
-		}
+		if (step === 1) return name.trim().length >= 3 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+		if (step === 2) return vslWatched;
+		if (step === 3) return !!data.profession;
+		if (step === 4) return data.useCases && data.useCases.length > 0;
+		if (step === 5) return !!portfolio && !!risk;
 		return true;
 	};
 	const handleNext = async () => {
-		if (!validateStep()) return;
+		if (!isValid()) return;
 		if (step < 6) {
 			setStep((s) => s + 1);
 			window.scrollTo({
@@ -25400,6 +25184,7 @@ function Index() {
 					className: "bg-green-50 border-green-200 text-green-800"
 				});
 				localStorage.removeItem("adapta_onboarding_data");
+				localStorage.removeItem("adapta_onboarding_step");
 				localStorage.removeItem("adapta_vsl_progress");
 				setData(initialData);
 				setStep(1);
@@ -25430,125 +25215,184 @@ function Index() {
 	const renderStep = () => {
 		const props = {
 			data,
-			updateData,
-			updateAdditionalData
+			updateData: (d) => setData((p) => ({
+				...p,
+				...d
+			})),
+			updateAdditionalData: (d) => setData((p) => ({
+				...p,
+				additionalData: {
+					...p.additionalData,
+					...d
+				}
+			}))
 		};
 		switch (step) {
 			case 1: return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Step1, {
-				"data-uid": "src/pages/Index.tsx:206:16",
+				"data-uid": "src/pages/Index.tsx:140:16",
 				"data-prohibitions": "[editContent]",
 				...props
 			});
 			case 2: return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Step2, {
-				"data-uid": "src/pages/Index.tsx:208:16",
+				"data-uid": "src/pages/Index.tsx:142:16",
 				"data-prohibitions": "[editContent]",
 				...props
 			});
 			case 3: return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Step3, {
-				"data-uid": "src/pages/Index.tsx:210:16",
+				"data-uid": "src/pages/Index.tsx:144:16",
 				"data-prohibitions": "[editContent]",
 				...props
 			});
 			case 4: return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Step4, {
-				"data-uid": "src/pages/Index.tsx:212:16",
+				"data-uid": "src/pages/Index.tsx:146:16",
 				"data-prohibitions": "[editContent]",
 				...props
 			});
 			case 5: return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Step5, {
-				"data-uid": "src/pages/Index.tsx:214:16",
+				"data-uid": "src/pages/Index.tsx:148:16",
 				"data-prohibitions": "[editContent]",
 				...props
 			});
 			case 6: return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Step6, {
-				"data-uid": "src/pages/Index.tsx:216:16",
+				"data-uid": "src/pages/Index.tsx:150:16",
 				"data-prohibitions": "[editContent]",
 				...props
 			});
 			default: return null;
 		}
 	};
+	if (!isLoaded) return null;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/pages/Index.tsx:223:5",
+		"data-uid": "src/pages/Index.tsx:159:5",
 		"data-prohibitions": "[editContent]",
 		className: "min-h-screen bg-slate-50 flex flex-col font-sans",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
-			"data-uid": "src/pages/Index.tsx:224:7",
+			"data-uid": "src/pages/Index.tsx:160:7",
 			"data-prohibitions": "[editContent]",
 			className: "w-full bg-white border-b border-slate-200 py-4 px-6 sticky top-0 z-10",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Index.tsx:225:9",
+				"data-uid": "src/pages/Index.tsx:161:9",
 				"data-prohibitions": "[editContent]",
-				className: "max-w-3xl mx-auto flex items-center justify-between",
+				className: "max-w-3xl mx-auto flex items-center justify-between mb-4",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/pages/Index.tsx:226:11",
+					"data-uid": "src/pages/Index.tsx:162:11",
 					"data-prohibitions": "[]",
 					className: "font-bold text-xl text-primary tracking-tight",
 					children: "Adapta Elite"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/pages/Index.tsx:227:11",
+					"data-uid": "src/pages/Index.tsx:163:11",
 					"data-prohibitions": "[editContent]",
 					className: "text-sm font-medium text-slate-500",
 					children: [
 						"Etapa ",
 						step,
-						" de 6"
+						" de 6",
+						" ",
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+							"data-uid": "src/pages/Index.tsx:165:13",
+							"data-prohibitions": "[editContent]",
+							className: "ml-1 text-slate-400",
+							children: [
+								"(",
+								Math.round(step / 6 * 100),
+								"%)"
+							]
+						})
 					]
 				})]
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/pages/Index.tsx:229:9",
-				"data-prohibitions": "[]",
-				className: "max-w-3xl mx-auto mt-4",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Progress, {
-					"data-uid": "src/pages/Index.tsx:230:11",
-					"data-prohibitions": "[editContent]",
-					value: step / 6 * 100,
-					className: "h-2"
-				})
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/pages/Index.tsx:169:9",
+				"data-prohibitions": "[editContent]",
+				className: "max-w-3xl mx-auto relative z-0 mt-2",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/pages/Index.tsx:170:11",
+						"data-prohibitions": "[editContent]",
+						className: "absolute top-1/2 left-0 w-full h-1.5 bg-slate-100 -translate-y-1/2 rounded-full z-[-1]"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/pages/Index.tsx:171:11",
+						"data-prohibitions": "[editContent]",
+						className: "absolute top-1/2 left-0 h-1.5 bg-primary -translate-y-1/2 rounded-full transition-all duration-700 ease-in-out z-[-1]",
+						style: { width: `${(step - 1) / 5 * 100}%` }
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						"data-uid": "src/pages/Index.tsx:175:11",
+						"data-prohibitions": "[editContent]",
+						className: "relative flex justify-between w-full",
+						children: [
+							1,
+							2,
+							3,
+							4,
+							5,
+							6
+						].map((i) => {
+							const isCompleted = i < step;
+							const isActive = i === step;
+							return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								"data-uid": "src/pages/Index.tsx:181:17",
+								"data-prohibitions": "[editContent]",
+								className: cn("w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm sm:text-base font-semibold transition-all duration-500", isActive ? "bg-primary text-primary-foreground ring-4 ring-primary/20 scale-110 shadow-md" : isCompleted ? "bg-primary text-primary-foreground scale-100" : "bg-slate-200 text-slate-500 opacity-60 scale-95"),
+								children: isCompleted ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, {
+									"data-uid": "src/pages/Index.tsx:193:21",
+									"data-prohibitions": "[editContent]",
+									className: "w-4 h-4 sm:w-5 sm:h-5 animate-in zoom-in duration-300"
+								}) : i
+							}, i);
+						})
+					})
+				]
 			})]
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
-			"data-uid": "src/pages/Index.tsx:234:7",
+			"data-uid": "src/pages/Index.tsx:204:7",
 			"data-prohibitions": "[editContent]",
 			className: "flex-1 w-full max-w-3xl mx-auto p-4 md:p-8 flex flex-col justify-center py-10",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/pages/Index.tsx:235:9",
+				"data-uid": "src/pages/Index.tsx:205:9",
 				"data-prohibitions": "[editContent]",
 				className: "bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-10 flex-1 min-h-[400px]",
 				children: renderStep()
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Index.tsx:239:9",
+				"data-uid": "src/pages/Index.tsx:209:9",
 				"data-prohibitions": "[editContent]",
-				className: "flex items-center justify-between mt-8 pb-10",
+				className: "flex items-center justify-between mt-8 pb-10 gap-4",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-					"data-uid": "src/pages/Index.tsx:240:11",
+					"data-uid": "src/pages/Index.tsx:210:11",
 					"data-prohibitions": "[editContent]",
 					variant: "outline",
 					size: "lg",
 					onClick: handlePrev,
-					disabled: isSubmitting,
-					className: cn("h-14 px-6 text-base shadow-sm", step === 1 && "invisible"),
+					disabled: isSubmitting || step === 1,
+					className: cn("h-14 px-4 sm:px-6 text-base shadow-sm", step === 1 && "invisible"),
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronLeft, {
-						"data-uid": "src/pages/Index.tsx:247:13",
+						"data-uid": "src/pages/Index.tsx:217:13",
 						"data-prohibitions": "[editContent]",
-						className: "mr-2 h-5 w-5"
-					}), "Voltar"]
+						className: "mr-1 sm:mr-2 h-5 w-5"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						"data-uid": "src/pages/Index.tsx:218:13",
+						"data-prohibitions": "[]",
+						className: "hidden sm:inline",
+						children: "Voltar"
+					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-					"data-uid": "src/pages/Index.tsx:251:11",
+					"data-uid": "src/pages/Index.tsx:221:11",
 					"data-prohibitions": "[editContent]",
 					size: "lg",
 					onClick: handleNext,
-					disabled: isSubmitting,
-					className: cn("h-14 px-8 text-base transition-all duration-500", step === 2 && !data.additionalData.vslWatched ? "bg-slate-200 text-slate-500 hover:bg-slate-300 shadow-none border border-slate-300" : "bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg hover:-translate-y-0.5"),
+					disabled: isSubmitting || !isValid(),
+					className: cn("h-14 px-6 sm:px-8 text-base transition-all duration-500", !isValid() ? "bg-slate-200 text-slate-500 cursor-not-allowed border-none shadow-none disabled:opacity-80" : "bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg hover:-translate-y-0.5"),
 					children: [
 						isSubmitting && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-							"data-uid": "src/pages/Index.tsx:262:30",
+							"data-uid": "src/pages/Index.tsx:232:30",
 							"data-prohibitions": "[editContent]",
 							className: "mr-2 h-5 w-5 animate-spin"
 						}),
 						!isSubmitting && step === 6 ? "Finalizar" : !isSubmitting ? "Continuar" : "Enviando...",
 						!isSubmitting && step !== 6 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, {
-							"data-uid": "src/pages/Index.tsx:268:45",
+							"data-uid": "src/pages/Index.tsx:238:45",
 							"data-prohibitions": "[editContent]",
-							className: "ml-2 h-5 w-5"
+							className: "ml-1 sm:ml-2 h-5 w-5"
 						})
 					]
 				})]
@@ -25666,4 +25510,4 @@ var App_default = App;
 	"data-prohibitions": "[editContent]"
 }));
 
-//# sourceMappingURL=index-eiefvtHu.js.map
+//# sourceMappingURL=index-B1rUw_pM.js.map
