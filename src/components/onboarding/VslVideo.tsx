@@ -73,7 +73,7 @@ export function VslVideo({ isCompleted, onComplete }: VslVideoProps) {
   }
 
   return (
-    <div className="w-full max-w-[600px] mx-auto rounded-2xl overflow-hidden shadow-elevation border border-[#333333] bg-[#0C0C0D] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-1 hover:shadow-glow">
+    <div className="w-full max-w-[600px] mx-auto rounded-2xl overflow-hidden shadow-elevation border border-[#333333] bg-[#0C0C0D] transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-glow">
       <AspectRatio ratio={16 / 9}>
         <video
           ref={videoRef}

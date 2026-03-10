@@ -250,7 +250,7 @@ export const Step6 = ({ data }: StepProps) => (
     <p className="text-muted-foreground text-lg">
       Confirme seus dados antes de enviar sua solicitação.
     </p>
-    <div className="space-y-3 bg-[#111111]/80 p-6 rounded-2xl border border-[#333333] text-sm sm:text-base shadow-elevation hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">
+    <div className="space-y-3 bg-[#111111]/80 p-6 rounded-2xl border border-[#333333] text-sm sm:text-base shadow-elevation hover:-translate-y-1 transition-all duration-300 ease-in-out">
       {Object.entries({
         Nome: data.additionalData.name,
         'E-mail': data.additionalData.email,

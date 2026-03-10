@@ -26,7 +26,7 @@ export function RadioCards({
           <Label
             key={opt}
             className={cn(
-              'flex items-center justify-between p-4 sm:p-5 rounded-2xl border cursor-pointer transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] min-h-[64px]',
+              'flex items-center justify-between p-4 sm:p-5 rounded-2xl border cursor-pointer transition-all duration-300 ease-in-out min-h-[64px]',
               isSelected
                 ? 'border-primary bg-primary/10 ring-1 ring-primary text-primary shadow-glow scale-[1.02] -translate-y-1'
                 : 'border-[#333333] text-foreground bg-[#111111]/80 hover:border-primary/50 hover:bg-[#111111] hover:-translate-y-1 hover:shadow-elevation',
@@ -79,7 +79,7 @@ export function CheckboxCards({
             }}
             onClick={() => toggle(opt)}
             className={cn(
-              'flex items-center justify-between p-4 sm:p-5 rounded-2xl border cursor-pointer transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] min-h-[64px] outline-none',
+              'flex items-center justify-between p-4 sm:p-5 rounded-2xl border cursor-pointer transition-all duration-300 ease-in-out min-h-[64px] outline-none',
               isSelected
                 ? 'border-primary bg-primary/10 ring-1 ring-primary text-primary shadow-glow scale-[1.02] -translate-y-1'
                 : 'border-[#333333] text-foreground bg-[#111111]/80 hover:border-primary/50 hover:bg-[#111111] hover:-translate-y-1 hover:shadow-elevation focus-visible:ring-2 focus-visible:ring-primary',
