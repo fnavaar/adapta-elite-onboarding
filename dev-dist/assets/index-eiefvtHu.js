@@ -18986,6 +18986,10 @@ var Circle = createLucideIcon("circle", [["circle", {
 	r: "10",
 	key: "1mglay"
 }]]);
+var LoaderCircle = createLucideIcon("loader-circle", [["path", {
+	d: "M21 12a9 9 0 1 1-6.219-8.56",
+	key: "13zald"
+}]]);
 var X = createLucideIcon("x", [["path", {
 	d: "M18 6 6 18",
 	key: "1bl5f8"
@@ -24018,6 +24022,146 @@ var Label = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE
 	...props
 }));
 Label.displayName = Root$3.displayName;
+var alertVariants = cva("relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground", {
+	variants: { variant: {
+		default: "bg-background text-foreground",
+		destructive: "border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive"
+	} },
+	defaultVariants: { variant: "default" }
+});
+var Alert = import_react.forwardRef(({ className, variant, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	"data-uid": "src/components/ui/alert.tsx:27:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	role: "alert",
+	className: cn(alertVariants({ variant }), className),
+	...props
+}));
+Alert.displayName = "Alert";
+var AlertTitle = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", {
+	"data-uid": "src/components/ui/alert.tsx:33:5",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn("mb-1 font-medium leading-none tracking-tight", className),
+	...props
+}));
+AlertTitle.displayName = "AlertTitle";
+var AlertDescription = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	"data-uid": "src/components/ui/alert.tsx:46:3",
+	"data-prohibitions": "[editContent]",
+	ref,
+	className: cn("text-sm [&_p]:leading-relaxed", className),
+	...props
+}));
+AlertDescription.displayName = "AlertDescription";
+var NAME = "AspectRatio";
+var AspectRatio$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { ratio = 1 / 1, style, ...aspectRatioProps } = props;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		style: {
+			position: "relative",
+			width: "100%",
+			paddingBottom: `${100 / ratio}%`
+		},
+		"data-radix-aspect-ratio-wrapper": "",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
+			...aspectRatioProps,
+			ref: forwardedRef,
+			style: {
+				...style,
+				position: "absolute",
+				top: 0,
+				right: 0,
+				bottom: 0,
+				left: 0
+			}
+		})
+	});
+});
+AspectRatio$1.displayName = NAME;
+var AspectRatio = AspectRatio$1;
+function VslVideo({ isCompleted, onComplete }) {
+	const [error, setError] = (0, import_react.useState)(null);
+	const videoRef = (0, import_react.useRef)(null);
+	const handleTimeUpdate = (e) => {
+		const video = e.currentTarget;
+		localStorage.setItem("adapta_vsl_progress", video.currentTime.toString());
+		if (video.duration) {
+			if (video.currentTime / video.duration >= .98 && !isCompleted) onComplete();
+		}
+	};
+	const handleLoadedMetadata = (e) => {
+		const video = e.currentTarget;
+		const savedProgress = localStorage.getItem("adapta_vsl_progress");
+		if (savedProgress) {
+			const time = parseFloat(savedProgress);
+			if (time > 0 && time < video.duration) video.currentTime = time;
+		}
+	};
+	const handleError = (e) => {
+		const target = e.currentTarget;
+		if (!target.error) return;
+		switch (target.error.code) {
+			case target.error.MEDIA_ERR_NETWORK:
+				setError("Verifique sua conexão de internet.");
+				break;
+			case target.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
+				setError("Você não tem permissão para acessar este vídeo.");
+				break;
+			default: setError("Não foi possível carregar o vídeo. Tente novamente.");
+		}
+	};
+	(0, import_react.useEffect)(() => {
+		const progress = localStorage.getItem("adapta_vsl_progress");
+		if (progress && videoRef.current && isCompleted) videoRef.current.currentTime = parseFloat(progress);
+	}, [isCompleted]);
+	if (error) return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Alert, {
+		"data-uid": "src/components/onboarding/VslVideo.tsx:64:7",
+		"data-prohibitions": "[editContent]",
+		variant: "destructive",
+		className: "mb-4 bg-red-50 border-red-200 text-red-800",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleAlert, {
+				"data-uid": "src/components/onboarding/VslVideo.tsx:65:9",
+				"data-prohibitions": "[editContent]",
+				className: "h-4 w-4",
+				color: "currentColor"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertTitle, {
+				"data-uid": "src/components/onboarding/VslVideo.tsx:66:9",
+				"data-prohibitions": "[]",
+				children: "Erro na reprodução"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDescription, {
+				"data-uid": "src/components/onboarding/VslVideo.tsx:67:9",
+				"data-prohibitions": "[editContent]",
+				children: error
+			})
+		]
+	});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		"data-uid": "src/components/onboarding/VslVideo.tsx:73:5",
+		"data-prohibitions": "[]",
+		className: "w-full max-w-[600px] mx-auto rounded-xl overflow-hidden shadow-xl border border-slate-200 bg-slate-900",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AspectRatio, {
+			"data-uid": "src/components/onboarding/VslVideo.tsx:74:7",
+			"data-prohibitions": "[]",
+			ratio: 16 / 9,
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("video", {
+				"data-uid": "src/components/onboarding/VslVideo.tsx:75:9",
+				"data-prohibitions": "[editContent]",
+				ref: videoRef,
+				src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+				controls: true,
+				className: "w-full h-full object-cover bg-black",
+				controlsList: "nodownload",
+				onTimeUpdate: handleTimeUpdate,
+				onLoadedMetadata: handleLoadedMetadata,
+				onError: handleError
+			})
+		})
+	});
+}
 var DirectionContext = import_react.createContext(void 0);
 function useDirection(localDir) {
 	const globalDir = import_react.useContext(DirectionContext);
@@ -24203,7 +24347,7 @@ function focusFirst(candidates, preventScroll = false) {
 function wrapArray(array, startIndex) {
 	return array.map((_$1, index$1) => array[(startIndex + index$1) % array.length]);
 }
-var Root$2 = RovingFocusGroup;
+var Root$1 = RovingFocusGroup;
 var Item = RovingFocusGroupItem;
 function usePrevious(value) {
 	const ref = import_react.useRef({
@@ -24347,7 +24491,7 @@ var RadioGroup$1 = import_react.forwardRef((props, forwardedRef) => {
 		disabled,
 		value,
 		onValueChange: setValue,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$2, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$1, {
 			asChild: true,
 			...rovingFocusGroupScope,
 			orientation,
@@ -24456,276 +24600,227 @@ var RadioGroupItem = import_react.forwardRef(({ className, ...props }, ref) => {
 	});
 });
 RadioGroupItem.displayName = Item2.displayName;
-var alertVariants = cva("relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground", {
-	variants: { variant: {
-		default: "bg-background text-foreground",
-		destructive: "border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive"
-	} },
-	defaultVariants: { variant: "default" }
-});
-var Alert = import_react.forwardRef(({ className, variant, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	"data-uid": "src/components/ui/alert.tsx:27:3",
-	"data-prohibitions": "[editContent]",
-	ref,
-	role: "alert",
-	className: cn(alertVariants({ variant }), className),
-	...props
-}));
-Alert.displayName = "Alert";
-var AlertTitle = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h5", {
-	"data-uid": "src/components/ui/alert.tsx:33:5",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn("mb-1 font-medium leading-none tracking-tight", className),
-	...props
-}));
-AlertTitle.displayName = "AlertTitle";
-var AlertDescription = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	"data-uid": "src/components/ui/alert.tsx:46:3",
-	"data-prohibitions": "[editContent]",
-	ref,
-	className: cn("text-sm [&_p]:leading-relaxed", className),
-	...props
-}));
-AlertDescription.displayName = "AlertDescription";
-var NAME = "AspectRatio";
-var AspectRatio$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { ratio = 1 / 1, style, ...aspectRatioProps } = props;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-		style: {
-			position: "relative",
-			width: "100%",
-			paddingBottom: `${100 / ratio}%`
-		},
-		"data-radix-aspect-ratio-wrapper": "",
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
-			...aspectRatioProps,
-			ref: forwardedRef,
-			style: {
-				...style,
-				position: "absolute",
-				top: 0,
-				right: 0,
-				bottom: 0,
-				left: 0
-			}
-		})
-	});
-});
-AspectRatio$1.displayName = NAME;
-var AspectRatio = AspectRatio$1;
-function VslVideo({ isCompleted, onComplete }) {
-	const [error, setError] = (0, import_react.useState)(null);
-	const videoRef = (0, import_react.useRef)(null);
-	const handleTimeUpdate = (e) => {
-		const video = e.currentTarget;
-		localStorage.setItem("adapta_vsl_progress", video.currentTime.toString());
-		if (video.duration) {
-			if (video.currentTime / video.duration >= .98 && !isCompleted) onComplete();
-		}
-	};
-	const handleLoadedMetadata = (e) => {
-		const video = e.currentTarget;
-		const savedProgress = localStorage.getItem("adapta_vsl_progress");
-		if (savedProgress) {
-			const time = parseFloat(savedProgress);
-			if (time > 0 && time < video.duration) video.currentTime = time;
-		}
-	};
-	const handleError = (e) => {
-		const target = e.currentTarget;
-		if (!target.error) return;
-		switch (target.error.code) {
-			case target.error.MEDIA_ERR_NETWORK:
-				setError("Verifique sua conexão de internet.");
-				break;
-			case target.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
-				setError("Você não tem permissão para acessar este vídeo.");
-				break;
-			default: setError("Não foi possível carregar o vídeo. Tente novamente.");
-		}
-	};
-	(0, import_react.useEffect)(() => {
-		const progress = localStorage.getItem("adapta_vsl_progress");
-		if (progress && videoRef.current && isCompleted) videoRef.current.currentTime = parseFloat(progress);
-	}, [isCompleted]);
-	if (error) return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Alert, {
-		"data-uid": "src/components/onboarding/VslVideo.tsx:64:7",
-		"data-prohibitions": "[editContent]",
-		variant: "destructive",
-		className: "mb-4 bg-red-50 border-red-200 text-red-800",
-		children: [
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleAlert, {
-				"data-uid": "src/components/onboarding/VslVideo.tsx:65:9",
-				"data-prohibitions": "[editContent]",
-				className: "h-4 w-4",
-				color: "currentColor"
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertTitle, {
-				"data-uid": "src/components/onboarding/VslVideo.tsx:66:9",
-				"data-prohibitions": "[]",
-				children: "Erro na reprodução"
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDescription, {
-				"data-uid": "src/components/onboarding/VslVideo.tsx:67:9",
-				"data-prohibitions": "[editContent]",
-				children: error
-			})
-		]
-	});
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-		"data-uid": "src/components/onboarding/VslVideo.tsx:73:5",
-		"data-prohibitions": "[]",
-		className: "w-full max-w-[600px] mx-auto rounded-xl overflow-hidden shadow-xl border border-slate-200 bg-slate-900",
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AspectRatio, {
-			"data-uid": "src/components/onboarding/VslVideo.tsx:74:7",
-			"data-prohibitions": "[]",
-			ratio: 16 / 9,
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("video", {
-				"data-uid": "src/components/onboarding/VslVideo.tsx:75:9",
-				"data-prohibitions": "[editContent]",
-				ref: videoRef,
-				src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
-				controls: true,
-				className: "w-full h-full object-cover bg-black",
-				controlsList: "nodownload",
-				onTimeUpdate: handleTimeUpdate,
-				onLoadedMetadata: handleLoadedMetadata,
-				onError: handleError
-			})
-		})
-	});
-}
-function RadioCards({ value, onChange, options }) {
+function RadioCards({ value, onChange, options, columns = 1 }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(RadioGroup, {
-		"data-uid": "src/components/onboarding/Steps.tsx:32:5",
+		"data-uid": "src/components/onboarding/Cards.tsx:18:5",
 		"data-prohibitions": "[editContent]",
 		value,
 		onValueChange: onChange,
-		className: "grid gap-3 pt-2",
-		children: options.map((opt) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Label, {
-			"data-uid": "src/components/onboarding/Steps.tsx:34:9",
-			"data-prohibitions": "[editContent]",
-			className: cn("flex items-center p-4 sm:p-5 rounded-xl border cursor-pointer transition-all duration-200 hover:border-primary/50 hover:bg-slate-50 min-h-[56px] shadow-sm", value === opt ? "border-primary bg-primary/5 ring-1 ring-primary text-primary" : "border-slate-200 text-slate-700 bg-white"),
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RadioGroupItem, {
-				"data-uid": "src/components/onboarding/Steps.tsx:43:11",
+		className: cn("grid gap-3 pt-2", columns === 2 && "sm:grid-cols-2"),
+		children: options.map((opt) => {
+			const isSelected = value === opt;
+			return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Label, {
+				"data-uid": "src/components/onboarding/Cards.tsx:26:11",
 				"data-prohibitions": "[editContent]",
-				value: opt,
-				id: opt,
-				className: "sr-only"
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-				"data-uid": "src/components/onboarding/Steps.tsx:44:11",
-				"data-prohibitions": "[editContent]",
-				className: "text-base sm:text-lg font-medium",
-				children: opt
-			})]
-		}, opt))
+				className: cn("flex items-center justify-between p-4 sm:p-5 rounded-xl border cursor-pointer transition-all duration-300 min-h-[56px] shadow-sm", isSelected ? "border-green-500 bg-green-50 ring-1 ring-green-500 text-green-700 scale-[1.02]" : "border-slate-200 text-slate-700 bg-white hover:border-slate-300 hover:bg-slate-50"),
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					"data-uid": "src/components/onboarding/Cards.tsx:35:13",
+					"data-prohibitions": "[editContent]",
+					className: "flex items-center gap-3",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RadioGroupItem, {
+						"data-uid": "src/components/onboarding/Cards.tsx:36:15",
+						"data-prohibitions": "[editContent]",
+						value: opt,
+						id: opt,
+						className: "sr-only"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						"data-uid": "src/components/onboarding/Cards.tsx:37:15",
+						"data-prohibitions": "[editContent]",
+						className: "text-base sm:text-lg font-medium",
+						children: opt
+					})]
+				}), isSelected ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
+					"data-uid": "src/components/onboarding/Cards.tsx:40:15",
+					"data-prohibitions": "[editContent]",
+					className: "h-5 w-5 text-green-500 animate-in zoom-in duration-300 shrink-0"
+				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Circle, {
+					"data-uid": "src/components/onboarding/Cards.tsx:42:15",
+					"data-prohibitions": "[editContent]",
+					className: "h-5 w-5 text-slate-300 shrink-0"
+				})]
+			}, opt);
+		})
 	});
 }
-const Step1 = ({ data, updateData }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-	"data-uid": "src/components/onboarding/Steps.tsx:52:3",
-	"data-prohibitions": "[]",
-	className: "space-y-6",
-	children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/components/onboarding/Steps.tsx:53:5",
-		"data-prohibitions": "[]",
-		className: "space-y-2",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-			"data-uid": "src/components/onboarding/Steps.tsx:54:7",
-			"data-prohibitions": "[]",
-			className: "text-2xl sm:text-3xl font-semibold text-primary",
-			children: "Seus Dados"
-		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-			"data-uid": "src/components/onboarding/Steps.tsx:55:7",
-			"data-prohibitions": "[]",
-			className: "text-slate-500 text-lg",
-			children: "Para um atendimento exclusivo e personalizado."
-		})]
-	}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/components/onboarding/Steps.tsx:57:5",
-		"data-prohibitions": "[]",
-		className: "space-y-4 pt-2",
+function CheckboxCards({ values, onChange, options }) {
+	const toggle = (opt) => {
+		onChange(values.includes(opt) ? values.filter((v) => v !== opt) : [...values, opt]);
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		"data-uid": "src/components/onboarding/Cards.tsx:65:5",
+		"data-prohibitions": "[editContent]",
+		className: "grid sm:grid-cols-2 gap-3 pt-2",
+		children: options.map((opt) => {
+			const isSelected = values.includes(opt);
+			return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/components/onboarding/Cards.tsx:69:11",
+				"data-prohibitions": "[editContent]",
+				role: "checkbox",
+				"aria-checked": isSelected,
+				tabIndex: 0,
+				onKeyDown: (e) => {
+					if (e.key === "Enter" || e.key === " ") {
+						e.preventDefault();
+						toggle(opt);
+					}
+				},
+				onClick: () => toggle(opt),
+				className: cn("flex items-center justify-between p-4 sm:p-5 rounded-xl border cursor-pointer transition-all duration-300 min-h-[56px] shadow-sm outline-none", isSelected ? "border-green-500 bg-green-50 ring-1 ring-green-500 text-green-700 scale-[1.02]" : "border-slate-200 text-slate-700 bg-white hover:border-slate-300 hover:bg-slate-50 focus-visible:ring-2 focus-visible:ring-primary"),
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					"data-uid": "src/components/onboarding/Cards.tsx:88:13",
+					"data-prohibitions": "[editContent]",
+					className: "text-base sm:text-lg font-medium",
+					children: opt
+				}), isSelected ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
+					"data-uid": "src/components/onboarding/Cards.tsx:90:15",
+					"data-prohibitions": "[editContent]",
+					className: "h-5 w-5 text-green-500 animate-in zoom-in duration-300 shrink-0 ml-3"
+				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Circle, {
+					"data-uid": "src/components/onboarding/Cards.tsx:92:15",
+					"data-prohibitions": "[editContent]",
+					className: "h-5 w-5 text-slate-300 shrink-0 ml-3"
+				})]
+			}, opt);
+		})
+	});
+}
+const Step1 = ({ data, updateAdditionalData }) => {
+	const { name, email } = data.additionalData;
+	const nameError = name.length > 0 && name.trim().length < 3;
+	const emailError = email.length > 0 && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		"data-uid": "src/components/onboarding/Steps.tsx:33:5",
+		"data-prohibitions": "[editContent]",
+		className: "space-y-6 animate-in fade-in slide-in-from-right-4 duration-500",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/components/onboarding/Steps.tsx:58:7",
+			"data-uid": "src/components/onboarding/Steps.tsx:34:7",
 			"data-prohibitions": "[]",
 			className: "space-y-2",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
-				"data-uid": "src/components/onboarding/Steps.tsx:59:9",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+				"data-uid": "src/components/onboarding/Steps.tsx:35:9",
 				"data-prohibitions": "[]",
-				className: "text-slate-700 font-medium",
-				children: "Nome Completo"
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-				"data-uid": "src/components/onboarding/Steps.tsx:60:9",
-				"data-prohibitions": "[editContent]",
-				autoFocus: true,
-				className: "h-14 text-lg bg-white rounded-xl",
-				placeholder: "Ex: João Silva",
-				value: data.name,
-				onChange: (e) => updateData({ name: e.target.value })
+				className: "text-2xl sm:text-3xl font-semibold text-primary",
+				children: "Seus Dados"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+				"data-uid": "src/components/onboarding/Steps.tsx:36:9",
+				"data-prohibitions": "[]",
+				className: "text-slate-500 text-lg",
+				children: "Para um atendimento exclusivo e personalizado."
 			})]
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/components/onboarding/Steps.tsx:68:7",
-			"data-prohibitions": "[]",
-			className: "space-y-2",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
-				"data-uid": "src/components/onboarding/Steps.tsx:69:9",
-				"data-prohibitions": "[]",
-				className: "text-slate-700 font-medium",
-				children: "Melhor E-mail"
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-				"data-uid": "src/components/onboarding/Steps.tsx:70:9",
+			"data-uid": "src/components/onboarding/Steps.tsx:38:7",
+			"data-prohibitions": "[editContent]",
+			className: "space-y-4 pt-2",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/components/onboarding/Steps.tsx:39:9",
 				"data-prohibitions": "[editContent]",
-				type: "email",
-				className: "h-14 text-lg bg-white rounded-xl",
-				placeholder: "nome@exemplo.com",
-				value: data.email,
-				onChange: (e) => updateData({ email: e.target.value })
+				className: "space-y-2",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Label, {
+						"data-uid": "src/components/onboarding/Steps.tsx:40:11",
+						"data-prohibitions": "[]",
+						className: "text-slate-700 font-medium",
+						children: ["Nome Completo ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							"data-uid": "src/components/onboarding/Steps.tsx:41:27",
+							"data-prohibitions": "[]",
+							className: "text-red-500",
+							children: "*"
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+						"data-uid": "src/components/onboarding/Steps.tsx:43:11",
+						"data-prohibitions": "[editContent]",
+						autoFocus: true,
+						className: cn("h-14 text-lg bg-white rounded-xl transition-all duration-300", nameError ? "border-red-500 focus-visible:ring-red-500" : name.trim().length >= 3 ? "border-green-500 focus-visible:ring-green-500" : ""),
+						placeholder: "Ex: João Silva",
+						value: name,
+						onChange: (e) => updateAdditionalData({ name: e.target.value })
+					}),
+					nameError && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						"data-uid": "src/components/onboarding/Steps.tsx:58:13",
+						"data-prohibitions": "[]",
+						className: "text-red-500 text-sm animate-in fade-in slide-in-from-top-1",
+						children: "O nome deve ter pelo menos 3 caracteres."
+					})
+				]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				"data-uid": "src/components/onboarding/Steps.tsx:63:9",
+				"data-prohibitions": "[editContent]",
+				className: "space-y-2",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Label, {
+						"data-uid": "src/components/onboarding/Steps.tsx:64:11",
+						"data-prohibitions": "[]",
+						className: "text-slate-700 font-medium",
+						children: ["Melhor E-mail ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							"data-uid": "src/components/onboarding/Steps.tsx:65:27",
+							"data-prohibitions": "[]",
+							className: "text-red-500",
+							children: "*"
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+						"data-uid": "src/components/onboarding/Steps.tsx:67:11",
+						"data-prohibitions": "[editContent]",
+						type: "email",
+						className: cn("h-14 text-lg bg-white rounded-xl transition-all duration-300", emailError ? "border-red-500 focus-visible:ring-red-500" : email.length > 0 && !emailError ? "border-green-500 focus-visible:ring-green-500" : ""),
+						placeholder: "nome@exemplo.com",
+						value: email,
+						onChange: (e) => updateAdditionalData({ email: e.target.value })
+					}),
+					emailError && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						"data-uid": "src/components/onboarding/Steps.tsx:82:13",
+						"data-prohibitions": "[]",
+						className: "text-red-500 text-sm animate-in fade-in slide-in-from-top-1",
+						children: "Insira um e-mail válido."
+					})
+				]
 			})]
 		})]
-	})]
-});
-const Step2 = ({ data, updateData }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-	"data-uid": "src/components/onboarding/Steps.tsx:83:3",
+	});
+};
+const Step2 = ({ data, updateAdditionalData }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+	"data-uid": "src/components/onboarding/Steps.tsx:93:3",
 	"data-prohibitions": "[editContent]",
-	className: "space-y-6",
+	className: "space-y-6 animate-in fade-in slide-in-from-right-4 duration-500",
 	children: [
 		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/components/onboarding/Steps.tsx:84:5",
+			"data-uid": "src/components/onboarding/Steps.tsx:94:5",
 			"data-prohibitions": "[]",
 			className: "space-y-2 text-center",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-				"data-uid": "src/components/onboarding/Steps.tsx:85:7",
+				"data-uid": "src/components/onboarding/Steps.tsx:95:7",
 				"data-prohibitions": "[]",
 				className: "text-2xl sm:text-3xl font-semibold text-primary",
 				children: "Mensagem Importante"
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-				"data-uid": "src/components/onboarding/Steps.tsx:86:7",
+				"data-uid": "src/components/onboarding/Steps.tsx:96:7",
 				"data-prohibitions": "[]",
 				className: "text-slate-500 text-lg",
-				children: "Assista ao vídeo abaixo para entender nossa metodologia exclusiva."
+				children: "Assista ao vídeo abaixo para entender nossa metodologia."
 			})]
 		}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			"data-uid": "src/components/onboarding/Steps.tsx:90:5",
+			"data-uid": "src/components/onboarding/Steps.tsx:100:5",
 			"data-prohibitions": "[]",
 			className: "pt-4",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(VslVideo, {
-				"data-uid": "src/components/onboarding/Steps.tsx:91:7",
+				"data-uid": "src/components/onboarding/Steps.tsx:101:7",
 				"data-prohibitions": "[editContent]",
-				isCompleted: data.vslWatched,
-				onComplete: () => updateData({ vslWatched: true })
+				isCompleted: data.additionalData.vslWatched,
+				onComplete: () => updateAdditionalData({ vslWatched: true })
 			})
 		}),
-		data.vslWatched && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/components/onboarding/Steps.tsx:94:7",
+		data.additionalData.vslWatched && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			"data-uid": "src/components/onboarding/Steps.tsx:107:7",
 			"data-prohibitions": "[]",
 			className: "max-w-[600px] mx-auto mt-4 p-4 bg-green-50 border border-green-200 rounded-xl flex items-center justify-center gap-2 text-green-700 animate-in fade-in slide-in-from-bottom-2 duration-500",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
-				"data-uid": "src/components/onboarding/Steps.tsx:95:9",
+				"data-uid": "src/components/onboarding/Steps.tsx:108:9",
 				"data-prohibitions": "[editContent]",
 				className: "h-5 w-5"
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-				"data-uid": "src/components/onboarding/Steps.tsx:96:9",
+				"data-uid": "src/components/onboarding/Steps.tsx:109:9",
 				"data-prohibitions": "[]",
 				className: "font-medium",
 				children: "Vídeo concluído! Você já pode continuar."
@@ -24733,139 +24828,237 @@ const Step2 = ({ data, updateData }) => /* @__PURE__ */ (0, import_jsx_runtime.j
 		})
 	]
 });
+var PROFESSIONS = [
+	"Médico",
+	"Advogado",
+	"Empresário",
+	"Gestor",
+	"Contador",
+	"Engenheiro",
+	"Desenvolvedor"
+];
 const Step3 = ({ data, updateData }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-	"data-uid": "src/components/onboarding/Steps.tsx:103:3",
+	"data-uid": "src/components/onboarding/Steps.tsx:126:3",
 	"data-prohibitions": "[]",
-	className: "space-y-4",
+	className: "space-y-4 animate-in fade-in slide-in-from-right-4 duration-500",
 	children: [
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-			"data-uid": "src/components/onboarding/Steps.tsx:104:5",
+			"data-uid": "src/components/onboarding/Steps.tsx:127:5",
 			"data-prohibitions": "[]",
 			className: "text-2xl sm:text-3xl font-semibold text-primary",
-			children: "Objetivo Principal"
+			children: "Sua Área de Atuação"
 		}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-			"data-uid": "src/components/onboarding/Steps.tsx:105:5",
+			"data-uid": "src/components/onboarding/Steps.tsx:128:5",
 			"data-prohibitions": "[]",
 			className: "text-slate-500 text-lg",
-			children: "O que você busca com a Adapta Elite?"
+			children: "Selecione sua profissão para personalizarmos sua experiência."
 		}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RadioCards, {
-			"data-uid": "src/components/onboarding/Steps.tsx:106:5",
+			"data-uid": "src/components/onboarding/Steps.tsx:131:5",
 			"data-prohibitions": "[editContent]",
-			value: data.objective,
-			onChange: (v) => updateData({ objective: v }),
-			options: [
-				"Preservação de Patrimônio",
-				"Crescimento Acelerado",
-				"Sucessão Familiar",
-				"Diversificação Internacional"
-			]
+			value: data.profession,
+			onChange: (v) => updateData({
+				profession: v,
+				useCases: []
+			}),
+			options: PROFESSIONS,
+			columns: 2
 		})
 	]
 });
-const Step4 = ({ data, updateData }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-	"data-uid": "src/components/onboarding/Steps.tsx:120:3",
-	"data-prohibitions": "[]",
-	className: "space-y-4",
-	children: [
-		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-			"data-uid": "src/components/onboarding/Steps.tsx:121:5",
-			"data-prohibitions": "[]",
-			className: "text-2xl sm:text-3xl font-semibold text-primary",
-			children: "Volume de Portfólio"
-		}),
-		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-			"data-uid": "src/components/onboarding/Steps.tsx:122:5",
-			"data-prohibitions": "[]",
-			className: "text-slate-500 text-lg",
-			children: "Selecione a faixa atual dos seus investimentos."
-		}),
-		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RadioCards, {
-			"data-uid": "src/components/onboarding/Steps.tsx:123:5",
-			"data-prohibitions": "[editContent]",
-			value: data.portfolio,
-			onChange: (v) => updateData({ portfolio: v }),
-			options: [
-				"R$ 1M - R$ 5M",
-				"R$ 5M - R$ 15M",
-				"R$ 15M - R$ 50M",
-				"Acima de R$ 50M"
-			]
-		})
+var USE_CASES_MAP = {
+	Médico: [
+		"Gestão de Clínicas",
+		"Otimização de Impostos",
+		"Proteção Patrimonial",
+		"Investimentos Seguros"
+	],
+	Advogado: [
+		"Gestão de Honorários",
+		"Planejamento Sucessório",
+		"Holding Familiar",
+		"Diversificação"
+	],
+	Empresário: [
+		"Expansão de Negócios",
+		"Sucessão Empresarial",
+		"Gestão de Caixa",
+		"Holding Estruturada"
+	],
+	Gestor: [
+		"Alocação de Ativos",
+		"Previdência Privada",
+		"Diversificação Internacional",
+		"Proteção contra Inflação"
+	],
+	Contador: [
+		"Estruturação Tributária",
+		"Planejamento Financeiro",
+		"Parcerias Estratégicas",
+		"Gestão de Patrimônio"
+	],
+	Engenheiro: [
+		"Investimentos Imobiliários",
+		"Gestão de Projetos Pessoais",
+		"Proteção de Ativos",
+		"Aposentadoria Antecipada"
+	],
+	Desenvolvedor: [
+		"Recebimentos Internacionais",
+		"Startups & Equity",
+		"Criptoativos",
+		"Independência Financeira"
 	]
-});
-const Step5 = ({ data, updateData }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-	"data-uid": "src/components/onboarding/Steps.tsx:132:3",
-	"data-prohibitions": "[]",
-	className: "space-y-4",
+};
+const Step4 = ({ data, updateData }) => {
+	const options = USE_CASES_MAP[data.profession] || [];
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		"data-uid": "src/components/onboarding/Steps.tsx:188:5",
+		"data-prohibitions": "[editContent]",
+		className: "space-y-4 animate-in fade-in slide-in-from-right-4 duration-500",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+				"data-uid": "src/components/onboarding/Steps.tsx:189:7",
+				"data-prohibitions": "[]",
+				className: "text-2xl sm:text-3xl font-semibold text-primary",
+				children: "Interesses e Casos de Uso"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+				"data-uid": "src/components/onboarding/Steps.tsx:190:7",
+				"data-prohibitions": "[editContent]",
+				className: "text-slate-500 text-lg",
+				children: [
+					"Como ",
+					data.profession,
+					", o que mais faz sentido para você hoje?"
+				]
+			}),
+			options.length > 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CheckboxCards, {
+				"data-uid": "src/components/onboarding/Steps.tsx:194:9",
+				"data-prohibitions": "[editContent]",
+				values: data.useCases,
+				onChange: (v) => updateData({ useCases: v }),
+				options
+			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				"data-uid": "src/components/onboarding/Steps.tsx:200:9",
+				"data-prohibitions": "[]",
+				className: "p-4 bg-amber-50 text-amber-700 rounded-xl",
+				children: "Por favor, volte e selecione uma profissão primeiro."
+			})
+		]
+	});
+};
+const Step5 = ({ data, updateAdditionalData }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+	"data-uid": "src/components/onboarding/Steps.tsx:209:3",
+	"data-prohibitions": "[editContent]",
+	className: "space-y-8 animate-in fade-in slide-in-from-right-4 duration-500",
 	children: [
-		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-			"data-uid": "src/components/onboarding/Steps.tsx:133:5",
+		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			"data-uid": "src/components/onboarding/Steps.tsx:210:5",
 			"data-prohibitions": "[]",
-			className: "text-2xl sm:text-3xl font-semibold text-primary",
-			children: "Perfil de Risco"
+			className: "space-y-4",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+				"data-uid": "src/components/onboarding/Steps.tsx:211:7",
+				"data-prohibitions": "[]",
+				className: "text-2xl sm:text-3xl font-semibold text-primary",
+				children: "Seu Perfil Financeiro"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+				"data-uid": "src/components/onboarding/Steps.tsx:212:7",
+				"data-prohibitions": "[]",
+				className: "text-slate-500 text-lg",
+				children: "Para entendermos seu momento atual."
+			})]
 		}),
-		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-			"data-uid": "src/components/onboarding/Steps.tsx:134:5",
+		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			"data-uid": "src/components/onboarding/Steps.tsx:214:5",
 			"data-prohibitions": "[]",
-			className: "text-slate-500 text-lg",
-			children: "Como você lida com oscilações de mercado?"
+			className: "space-y-4",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+				"data-uid": "src/components/onboarding/Steps.tsx:215:7",
+				"data-prohibitions": "[]",
+				className: "text-xl font-medium text-slate-800",
+				children: "1. Volume de Portfólio"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(RadioCards, {
+				"data-uid": "src/components/onboarding/Steps.tsx:216:7",
+				"data-prohibitions": "[editContent]",
+				value: data.additionalData.portfolio,
+				onChange: (v) => updateAdditionalData({ portfolio: v }),
+				options: [
+					"R$ 1M - R$ 5M",
+					"R$ 5M - R$ 15M",
+					"R$ 15M - R$ 50M",
+					"Acima de R$ 50M"
+				],
+				columns: 2
+			})]
 		}),
-		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RadioCards, {
-			"data-uid": "src/components/onboarding/Steps.tsx:135:5",
-			"data-prohibitions": "[editContent]",
-			value: data.risk,
-			onChange: (v) => updateData({ risk: v }),
-			options: [
-				"Conservador",
-				"Moderado",
-				"Arrojado",
-				"Agressivo"
-			]
+		data.additionalData.portfolio && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			"data-uid": "src/components/onboarding/Steps.tsx:224:7",
+			"data-prohibitions": "[]",
+			className: "space-y-4 pt-6 border-t border-slate-100 animate-in fade-in slide-in-from-top-4 duration-500",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+				"data-uid": "src/components/onboarding/Steps.tsx:225:9",
+				"data-prohibitions": "[]",
+				className: "text-xl font-medium text-slate-800",
+				children: "2. Perfil de Risco"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(RadioCards, {
+				"data-uid": "src/components/onboarding/Steps.tsx:226:9",
+				"data-prohibitions": "[editContent]",
+				value: data.additionalData.risk,
+				onChange: (v) => updateAdditionalData({ risk: v }),
+				options: [
+					"Conservador",
+					"Moderado",
+					"Arrojado",
+					"Agressivo"
+				],
+				columns: 2
+			})]
 		})
 	]
 });
 const Step6 = ({ data }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-	"data-uid": "src/components/onboarding/Steps.tsx:144:3",
+	"data-uid": "src/components/onboarding/Steps.tsx:238:3",
 	"data-prohibitions": "[editContent]",
-	className: "space-y-6",
+	className: "space-y-6 animate-in fade-in slide-in-from-right-4 duration-500",
 	children: [
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-			"data-uid": "src/components/onboarding/Steps.tsx:145:5",
+			"data-uid": "src/components/onboarding/Steps.tsx:239:5",
 			"data-prohibitions": "[]",
 			className: "text-2xl sm:text-3xl font-semibold text-primary",
 			children: "Revisão Final"
 		}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-			"data-uid": "src/components/onboarding/Steps.tsx:146:5",
+			"data-uid": "src/components/onboarding/Steps.tsx:240:5",
 			"data-prohibitions": "[]",
 			className: "text-slate-500 text-lg",
 			children: "Confirme seus dados antes de enviar sua solicitação."
 		}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			"data-uid": "src/components/onboarding/Steps.tsx:147:5",
+			"data-uid": "src/components/onboarding/Steps.tsx:241:5",
 			"data-prohibitions": "[editContent]",
 			className: "space-y-3 bg-slate-50 p-6 rounded-xl border border-slate-100 text-sm sm:text-base shadow-inner",
 			children: Object.entries({
-				Nome: data.name,
-				"E-mail": data.email,
-				Objetivo: data.objective,
-				Portfólio: data.portfolio,
-				Risco: data.risk
+				Nome: data.additionalData.name,
+				"E-mail": data.additionalData.email,
+				Profissão: data.profession,
+				Interesses: data.useCases.join(", "),
+				Portfólio: data.additionalData.portfolio,
+				Risco: data.additionalData.risk
 			}).map(([k, v]) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/onboarding/Steps.tsx:155:9",
+				"data-uid": "src/components/onboarding/Steps.tsx:250:9",
 				"data-prohibitions": "[editContent]",
-				className: "flex justify-between border-b border-slate-200 last:border-0 pb-3 pt-1 last:pb-0",
+				className: "flex flex-col sm:flex-row sm:justify-between border-b border-slate-200 last:border-0 pb-3 pt-1 last:pb-0 gap-1",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					"data-uid": "src/components/onboarding/Steps.tsx:159:11",
+					"data-uid": "src/components/onboarding/Steps.tsx:254:11",
 					"data-prohibitions": "[editContent]",
 					className: "text-slate-500",
 					children: k
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					"data-uid": "src/components/onboarding/Steps.tsx:160:11",
+					"data-uid": "src/components/onboarding/Steps.tsx:255:11",
 					"data-prohibitions": "[editContent]",
-					className: "font-medium text-slate-900 text-right w-1/2",
+					className: "font-medium text-slate-900 sm:text-right sm:w-2/3",
 					children: v || "-"
 				})]
 			}, k))
@@ -25057,21 +25250,33 @@ var Progress = import_react.forwardRef(({ className, value, ...props }, ref) => 
 }));
 Progress.displayName = Root.displayName;
 var initialData = {
-	name: "",
-	email: "",
-	vslWatched: false,
-	objective: "",
-	portfolio: "",
-	risk: ""
+	profession: "",
+	useCases: [],
+	additionalData: {
+		name: "",
+		email: "",
+		vslWatched: false,
+		portfolio: "",
+		risk: ""
+	}
 };
 function Index() {
 	const [step, setStep] = (0, import_react.useState)(1);
 	const [data, setData] = (0, import_react.useState)(initialData);
+	const [isSubmitting, setIsSubmitting] = (0, import_react.useState)(false);
 	const { toast: toast$2 } = useToast();
 	(0, import_react.useEffect)(() => {
 		const saved = localStorage.getItem("adapta_onboarding_data");
 		if (saved) try {
-			setData(JSON.parse(saved));
+			const parsed = JSON.parse(saved);
+			setData({
+				...initialData,
+				...parsed,
+				additionalData: {
+					...initialData.additionalData,
+					...parsed.additionalData || {}
+				}
+			});
 		} catch (e) {}
 	}, []);
 	(0, import_react.useEffect)(() => {
@@ -25083,45 +25288,96 @@ function Index() {
 			...newData
 		}));
 	};
+	const updateAdditionalData = (newAdditional) => {
+		setData((prev) => ({
+			...prev,
+			additionalData: {
+				...prev.additionalData,
+				...newAdditional
+			}
+		}));
+	};
 	const validateStep = () => {
-		if (step === 1 && (!data.name.trim() || !data.email.trim())) {
+		const { name, email, vslWatched, portfolio, risk } = data.additionalData;
+		if (step === 1) {
+			if (!name.trim()) {
+				toast$2({
+					title: "Campo obrigatório",
+					description: "O nome é obrigatório.",
+					variant: "destructive"
+				});
+				return false;
+			}
+			if (name.trim().length < 3) {
+				toast$2({
+					title: "Nome inválido",
+					description: "O nome deve ter pelo menos 3 caracteres.",
+					variant: "destructive"
+				});
+				return false;
+			}
+			if (!email.trim()) {
+				toast$2({
+					title: "Campo obrigatório",
+					description: "O e-mail é obrigatório.",
+					variant: "destructive"
+				});
+				return false;
+			}
+			if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+				toast$2({
+					title: "E-mail inválido",
+					description: "Insira um e-mail válido.",
+					variant: "destructive"
+				});
+				return false;
+			}
+		}
+		if (step === 2 && !vslWatched) {
 			toast$2({
-				title: "Preencha todos os campos",
+				title: "Atenção",
+				description: "Assista o vídeo completo para continuar",
 				variant: "destructive"
 			});
 			return false;
 		}
-		if (step === 2 && !data.vslWatched) {
+		if (step === 3 && !data.profession) {
 			toast$2({
-				title: "Assista o vídeo completo para continuar",
+				title: "Campo obrigatório",
+				description: "Selecione sua profissão para continuar",
 				variant: "destructive"
 			});
 			return false;
 		}
-		if (step === 3 && !data.objective) {
+		if (step === 4 && (!data.useCases || data.useCases.length === 0)) {
 			toast$2({
-				title: "Selecione um objetivo",
+				title: "Campo obrigatório",
+				description: "Selecione pelo menos um caso de uso",
 				variant: "destructive"
 			});
 			return false;
 		}
-		if (step === 4 && !data.portfolio) {
-			toast$2({
-				title: "Selecione o volume do portfólio",
-				variant: "destructive"
-			});
-			return false;
-		}
-		if (step === 5 && !data.risk) {
-			toast$2({
-				title: "Selecione seu perfil de risco",
-				variant: "destructive"
-			});
-			return false;
+		if (step === 5) {
+			if (!portfolio) {
+				toast$2({
+					title: "Campo obrigatório",
+					description: "Selecione o volume do portfólio",
+					variant: "destructive"
+				});
+				return false;
+			}
+			if (!risk) {
+				toast$2({
+					title: "Campo obrigatório",
+					description: "Selecione seu perfil de risco",
+					variant: "destructive"
+				});
+				return false;
+			}
 		}
 		return true;
 	};
-	const handleNext = () => {
+	const handleNext = async () => {
 		if (!validateStep()) return;
 		if (step < 6) {
 			setStep((s) => s + 1);
@@ -25130,12 +25386,36 @@ function Index() {
 				behavior: "smooth"
 			});
 		} else {
-			toast$2({
-				title: "Solicitação enviada com sucesso!",
-				description: "Nossa equipe entrará em contato em breve."
-			});
-			localStorage.removeItem("adapta_onboarding_data");
-			localStorage.removeItem("adapta_vsl_progress");
+			setIsSubmitting(true);
+			try {
+				await new Promise((resolve, reject) => {
+					setTimeout(() => {
+						if (Math.random() > .9) reject(/* @__PURE__ */ new Error("Network error"));
+						else resolve(true);
+					}, 1500);
+				});
+				toast$2({
+					title: "Solicitação enviada com sucesso!",
+					description: "Nossa equipe entrará em contato em breve.",
+					className: "bg-green-50 border-green-200 text-green-800"
+				});
+				localStorage.removeItem("adapta_onboarding_data");
+				localStorage.removeItem("adapta_vsl_progress");
+				setData(initialData);
+				setStep(1);
+				window.scrollTo({
+					top: 0,
+					behavior: "smooth"
+				});
+			} catch (e) {
+				toast$2({
+					title: "Erro de conexão",
+					description: "Não foi possível salvar. Tente novamente.",
+					variant: "destructive"
+				});
+			} finally {
+				setIsSubmitting(false);
+			}
 		}
 	};
 	const handlePrev = () => {
@@ -25148,65 +25428,64 @@ function Index() {
 		}
 	};
 	const renderStep = () => {
+		const props = {
+			data,
+			updateData,
+			updateAdditionalData
+		};
 		switch (step) {
 			case 1: return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Step1, {
-				"data-uid": "src/pages/Index.tsx:99:16",
+				"data-uid": "src/pages/Index.tsx:206:16",
 				"data-prohibitions": "[editContent]",
-				data,
-				updateData
+				...props
 			});
 			case 2: return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Step2, {
-				"data-uid": "src/pages/Index.tsx:101:16",
+				"data-uid": "src/pages/Index.tsx:208:16",
 				"data-prohibitions": "[editContent]",
-				data,
-				updateData
+				...props
 			});
 			case 3: return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Step3, {
-				"data-uid": "src/pages/Index.tsx:103:16",
+				"data-uid": "src/pages/Index.tsx:210:16",
 				"data-prohibitions": "[editContent]",
-				data,
-				updateData
+				...props
 			});
 			case 4: return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Step4, {
-				"data-uid": "src/pages/Index.tsx:105:16",
+				"data-uid": "src/pages/Index.tsx:212:16",
 				"data-prohibitions": "[editContent]",
-				data,
-				updateData
+				...props
 			});
 			case 5: return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Step5, {
-				"data-uid": "src/pages/Index.tsx:107:16",
+				"data-uid": "src/pages/Index.tsx:214:16",
 				"data-prohibitions": "[editContent]",
-				data,
-				updateData
+				...props
 			});
 			case 6: return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Step6, {
-				"data-uid": "src/pages/Index.tsx:109:16",
+				"data-uid": "src/pages/Index.tsx:216:16",
 				"data-prohibitions": "[editContent]",
-				data,
-				updateData
+				...props
 			});
 			default: return null;
 		}
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/pages/Index.tsx:116:5",
+		"data-uid": "src/pages/Index.tsx:223:5",
 		"data-prohibitions": "[editContent]",
 		className: "min-h-screen bg-slate-50 flex flex-col font-sans",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
-			"data-uid": "src/pages/Index.tsx:117:7",
+			"data-uid": "src/pages/Index.tsx:224:7",
 			"data-prohibitions": "[editContent]",
 			className: "w-full bg-white border-b border-slate-200 py-4 px-6 sticky top-0 z-10",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Index.tsx:118:9",
+				"data-uid": "src/pages/Index.tsx:225:9",
 				"data-prohibitions": "[editContent]",
 				className: "max-w-3xl mx-auto flex items-center justify-between",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/pages/Index.tsx:119:11",
+					"data-uid": "src/pages/Index.tsx:226:11",
 					"data-prohibitions": "[]",
 					className: "font-bold text-xl text-primary tracking-tight",
 					children: "Adapta Elite"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					"data-uid": "src/pages/Index.tsx:120:11",
+					"data-uid": "src/pages/Index.tsx:227:11",
 					"data-prohibitions": "[editContent]",
 					className: "text-sm font-medium text-slate-500",
 					children: [
@@ -25216,57 +25495,62 @@ function Index() {
 					]
 				})]
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/pages/Index.tsx:122:9",
+				"data-uid": "src/pages/Index.tsx:229:9",
 				"data-prohibitions": "[]",
 				className: "max-w-3xl mx-auto mt-4",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Progress, {
-					"data-uid": "src/pages/Index.tsx:123:11",
+					"data-uid": "src/pages/Index.tsx:230:11",
 					"data-prohibitions": "[editContent]",
 					value: step / 6 * 100,
 					className: "h-2"
 				})
 			})]
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
-			"data-uid": "src/pages/Index.tsx:127:7",
+			"data-uid": "src/pages/Index.tsx:234:7",
 			"data-prohibitions": "[editContent]",
 			className: "flex-1 w-full max-w-3xl mx-auto p-4 md:p-8 flex flex-col justify-center py-10",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/pages/Index.tsx:128:9",
+				"data-uid": "src/pages/Index.tsx:235:9",
 				"data-prohibitions": "[editContent]",
-				className: "bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-10 flex-1 min-h-[400px] animate-in fade-in slide-in-from-bottom-4 duration-500",
+				className: "bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-10 flex-1 min-h-[400px]",
 				children: renderStep()
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Index.tsx:132:9",
+				"data-uid": "src/pages/Index.tsx:239:9",
 				"data-prohibitions": "[editContent]",
 				className: "flex items-center justify-between mt-8 pb-10",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-					"data-uid": "src/pages/Index.tsx:133:11",
+					"data-uid": "src/pages/Index.tsx:240:11",
 					"data-prohibitions": "[editContent]",
 					variant: "outline",
 					size: "lg",
 					onClick: handlePrev,
+					disabled: isSubmitting,
 					className: cn("h-14 px-6 text-base shadow-sm", step === 1 && "invisible"),
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronLeft, {
-						"data-uid": "src/pages/Index.tsx:139:13",
+						"data-uid": "src/pages/Index.tsx:247:13",
 						"data-prohibitions": "[editContent]",
 						className: "mr-2 h-5 w-5"
 					}), "Voltar"]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/pages/Index.tsx:143:11",
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+					"data-uid": "src/pages/Index.tsx:251:11",
 					"data-prohibitions": "[editContent]",
-					className: "relative",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-						"data-uid": "src/pages/Index.tsx:144:13",
-						"data-prohibitions": "[editContent]",
-						size: "lg",
-						onClick: handleNext,
-						className: cn("h-14 px-8 text-base transition-all duration-500", step === 2 && !data.vslWatched ? "bg-slate-200 text-slate-500 hover:bg-slate-300 shadow-none border border-slate-300" : "bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg hover:-translate-y-0.5"),
-						children: [step === 6 ? "Finalizar" : "Continuar", step !== 6 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, {
-							"data-uid": "src/pages/Index.tsx:155:30",
+					size: "lg",
+					onClick: handleNext,
+					disabled: isSubmitting,
+					className: cn("h-14 px-8 text-base transition-all duration-500", step === 2 && !data.additionalData.vslWatched ? "bg-slate-200 text-slate-500 hover:bg-slate-300 shadow-none border border-slate-300" : "bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg hover:-translate-y-0.5"),
+					children: [
+						isSubmitting && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+							"data-uid": "src/pages/Index.tsx:262:30",
+							"data-prohibitions": "[editContent]",
+							className: "mr-2 h-5 w-5 animate-spin"
+						}),
+						!isSubmitting && step === 6 ? "Finalizar" : !isSubmitting ? "Continuar" : "Enviando...",
+						!isSubmitting && step !== 6 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, {
+							"data-uid": "src/pages/Index.tsx:268:45",
 							"data-prohibitions": "[editContent]",
 							className: "ml-2 h-5 w-5"
-						})]
-					})
+						})
+					]
 				})]
 			})]
 		})]
@@ -25382,4 +25666,4 @@ var App_default = App;
 	"data-prohibitions": "[editContent]"
 }));
 
-//# sourceMappingURL=index-CsXu1OI4.js.map
+//# sourceMappingURL=index-eiefvtHu.js.map

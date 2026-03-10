@@ -10,29 +10,42 @@ import {
 } from '@/components/onboarding/Steps'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
-import { ChevronRight, ChevronLeft } from 'lucide-react'
+import { ChevronRight, ChevronLeft, Loader2 } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 import { cn } from '@/lib/utils'
 
 const initialData: FormData = {
-  name: '',
-  email: '',
-  vslWatched: false,
-  objective: '',
-  portfolio: '',
-  risk: '',
+  profession: '',
+  useCases: [],
+  additionalData: {
+    name: '',
+    email: '',
+    vslWatched: false,
+    portfolio: '',
+    risk: '',
+  },
 }
 
 export default function Index() {
   const [step, setStep] = useState(1)
   const [data, setData] = useState<FormData>(initialData)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
 
   useEffect(() => {
     const saved = localStorage.getItem('adapta_onboarding_data')
     if (saved) {
       try {
-        setData(JSON.parse(saved))
+        const parsed = JSON.parse(saved)
+        // Ensure nested structure is maintained
+        setData({
+          ...initialData,
+          ...parsed,
+          additionalData: {
+            ...initialData.additionalData,
+            ...(parsed.additionalData || {}),
+          },
+        })
       } catch (e) {
         // Handle invalid JSON silently
       }
@@ -47,42 +60,135 @@ export default function Index() {
     setData((prev) => ({ ...prev, ...newData }))
   }
 
+  const updateAdditionalData = (newAdditional: Partial<FormData['additionalData']>) => {
+    setData((prev) => ({
+      ...prev,
+      additionalData: { ...prev.additionalData, ...newAdditional },
+    }))
+  }
+
   const validateStep = () => {
-    if (step === 1 && (!data.name.trim() || !data.email.trim())) {
-      toast({ title: 'Preencha todos os campos', variant: 'destructive' })
+    const { name, email, vslWatched, portfolio, risk } = data.additionalData
+
+    if (step === 1) {
+      if (!name.trim()) {
+        toast({
+          title: 'Campo obrigatório',
+          description: 'O nome é obrigatório.',
+          variant: 'destructive',
+        })
+        return false
+      }
+      if (name.trim().length < 3) {
+        toast({
+          title: 'Nome inválido',
+          description: 'O nome deve ter pelo menos 3 caracteres.',
+          variant: 'destructive',
+        })
+        return false
+      }
+      if (!email.trim()) {
+        toast({
+          title: 'Campo obrigatório',
+          description: 'O e-mail é obrigatório.',
+          variant: 'destructive',
+        })
+        return false
+      }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(email)) {
+        toast({
+          title: 'E-mail inválido',
+          description: 'Insira um e-mail válido.',
+          variant: 'destructive',
+        })
+        return false
+      }
+    }
+    if (step === 2 && !vslWatched) {
+      toast({
+        title: 'Atenção',
+        description: 'Assista o vídeo completo para continuar',
+        variant: 'destructive',
+      })
       return false
     }
-    if (step === 2 && !data.vslWatched) {
-      toast({ title: 'Assista o vídeo completo para continuar', variant: 'destructive' })
+    if (step === 3 && !data.profession) {
+      toast({
+        title: 'Campo obrigatório',
+        description: 'Selecione sua profissão para continuar',
+        variant: 'destructive',
+      })
       return false
     }
-    if (step === 3 && !data.objective) {
-      toast({ title: 'Selecione um objetivo', variant: 'destructive' })
+    if (step === 4 && (!data.useCases || data.useCases.length === 0)) {
+      toast({
+        title: 'Campo obrigatório',
+        description: 'Selecione pelo menos um caso de uso',
+        variant: 'destructive',
+      })
       return false
     }
-    if (step === 4 && !data.portfolio) {
-      toast({ title: 'Selecione o volume do portfólio', variant: 'destructive' })
-      return false
-    }
-    if (step === 5 && !data.risk) {
-      toast({ title: 'Selecione seu perfil de risco', variant: 'destructive' })
-      return false
+    if (step === 5) {
+      if (!portfolio) {
+        toast({
+          title: 'Campo obrigatório',
+          description: 'Selecione o volume do portfólio',
+          variant: 'destructive',
+        })
+        return false
+      }
+      if (!risk) {
+        toast({
+          title: 'Campo obrigatório',
+          description: 'Selecione seu perfil de risco',
+          variant: 'destructive',
+        })
+        return false
+      }
     }
     return true
   }
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (!validateStep()) return
+
     if (step < 6) {
       setStep((s) => s + 1)
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } else {
-      toast({
-        title: 'Solicitação enviada com sucesso!',
-        description: 'Nossa equipe entrará em contato em breve.',
-      })
-      localStorage.removeItem('adapta_onboarding_data')
-      localStorage.removeItem('adapta_vsl_progress')
+      setIsSubmitting(true)
+      try {
+        await new Promise((resolve, reject) => {
+          setTimeout(() => {
+            // Simulated 10% chance of failure for realistic error handling
+            if (Math.random() > 0.9) {
+              reject(new Error('Network error'))
+            } else {
+              resolve(true)
+            }
+          }, 1500)
+        })
+
+        toast({
+          title: 'Solicitação enviada com sucesso!',
+          description: 'Nossa equipe entrará em contato em breve.',
+          className: 'bg-green-50 border-green-200 text-green-800',
+        })
+        localStorage.removeItem('adapta_onboarding_data')
+        localStorage.removeItem('adapta_vsl_progress')
+        setData(initialData)
+        setStep(1)
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } catch (e) {
+        toast({
+          title: 'Erro de conexão',
+          description: 'Não foi possível salvar. Tente novamente.',
+          variant: 'destructive',
+        })
+      } finally {
+        setIsSubmitting(false)
+      }
     }
   }
 
@@ -94,19 +200,20 @@ export default function Index() {
   }
 
   const renderStep = () => {
+    const props = { data, updateData, updateAdditionalData }
     switch (step) {
       case 1:
-        return <Step1 data={data} updateData={updateData} />
+        return <Step1 {...props} />
       case 2:
-        return <Step2 data={data} updateData={updateData} />
+        return <Step2 {...props} />
       case 3:
-        return <Step3 data={data} updateData={updateData} />
+        return <Step3 {...props} />
       case 4:
-        return <Step4 data={data} updateData={updateData} />
+        return <Step4 {...props} />
       case 5:
-        return <Step5 data={data} updateData={updateData} />
+        return <Step5 {...props} />
       case 6:
-        return <Step6 data={data} updateData={updateData} />
+        return <Step6 {...props} />
       default:
         return null
     }
@@ -125,7 +232,7 @@ export default function Index() {
       </header>
 
       <main className="flex-1 w-full max-w-3xl mx-auto p-4 md:p-8 flex flex-col justify-center py-10">
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-10 flex-1 min-h-[400px] animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-10 flex-1 min-h-[400px]">
           {renderStep()}
         </div>
 
@@ -134,27 +241,32 @@ export default function Index() {
             variant="outline"
             size="lg"
             onClick={handlePrev}
+            disabled={isSubmitting}
             className={cn('h-14 px-6 text-base shadow-sm', step === 1 && 'invisible')}
           >
             <ChevronLeft className="mr-2 h-5 w-5" />
             Voltar
           </Button>
 
-          <div className="relative">
-            <Button
-              size="lg"
-              onClick={handleNext}
-              className={cn(
-                'h-14 px-8 text-base transition-all duration-500',
-                step === 2 && !data.vslWatched
-                  ? 'bg-slate-200 text-slate-500 hover:bg-slate-300 shadow-none border border-slate-300'
-                  : 'bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg hover:-translate-y-0.5',
-              )}
-            >
-              {step === 6 ? 'Finalizar' : 'Continuar'}
-              {step !== 6 && <ChevronRight className="ml-2 h-5 w-5" />}
-            </Button>
-          </div>
+          <Button
+            size="lg"
+            onClick={handleNext}
+            disabled={isSubmitting}
+            className={cn(
+              'h-14 px-8 text-base transition-all duration-500',
+              step === 2 && !data.additionalData.vslWatched
+                ? 'bg-slate-200 text-slate-500 hover:bg-slate-300 shadow-none border border-slate-300'
+                : 'bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg hover:-translate-y-0.5',
+            )}
+          >
+            {isSubmitting && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
+            {!isSubmitting && step === 6
+              ? 'Finalizar'
+              : !isSubmitting
+                ? 'Continuar'
+                : 'Enviando...'}
+            {!isSubmitting && step !== 6 && <ChevronRight className="ml-2 h-5 w-5" />}
+          </Button>
         </div>
       </main>
     </div>
