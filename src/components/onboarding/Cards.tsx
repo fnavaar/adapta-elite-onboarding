@@ -18,7 +18,7 @@ export function RadioCards({
     <RadioGroup
       value={value}
       onValueChange={onChange}
-      className={cn('grid gap-3 pt-2', columns === 2 && 'sm:grid-cols-2')}
+      className={cn('grid gap-4 pt-2', columns === 2 && 'sm:grid-cols-2')}
     >
       {options.map((opt) => {
         const isSelected = value === opt
@@ -26,10 +26,10 @@ export function RadioCards({
           <Label
             key={opt}
             className={cn(
-              'flex items-center justify-between p-4 sm:p-5 rounded-xl border cursor-pointer transition-all duration-300 min-h-[56px] shadow-sm',
+              'flex items-center justify-between p-4 sm:p-5 rounded-2xl border cursor-pointer transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] min-h-[64px]',
               isSelected
-                ? 'border-green-500 bg-green-50 ring-1 ring-green-500 text-green-700 scale-[1.02]'
-                : 'border-slate-200 text-slate-700 bg-white hover:border-slate-300 hover:bg-slate-50',
+                ? 'border-primary bg-primary/10 ring-1 ring-primary text-primary shadow-glow scale-[1.02] -translate-y-1'
+                : 'border-[#333333] text-foreground bg-[#111111]/80 hover:border-primary/50 hover:bg-[#111111] hover:-translate-y-1 hover:shadow-elevation',
             )}
           >
             <div className="flex items-center gap-3">
@@ -37,9 +37,9 @@ export function RadioCards({
               <span className="text-base sm:text-lg font-medium">{opt}</span>
             </div>
             {isSelected ? (
-              <CheckCircle2 className="h-5 w-5 text-green-500 animate-in zoom-in duration-300 shrink-0" />
+              <CheckCircle2 className="h-5 w-5 text-primary animate-in zoom-in duration-300 shrink-0" />
             ) : (
-              <Circle className="h-5 w-5 text-slate-300 shrink-0" />
+              <Circle className="h-5 w-5 text-[#333333] shrink-0" />
             )}
           </Label>
         )
@@ -62,7 +62,7 @@ export function CheckboxCards({
   }
 
   return (
-    <div className="grid sm:grid-cols-2 gap-3 pt-2">
+    <div className="grid sm:grid-cols-2 gap-4 pt-2">
       {options.map((opt) => {
         const isSelected = values.includes(opt)
         return (
@@ -79,17 +79,17 @@ export function CheckboxCards({
             }}
             onClick={() => toggle(opt)}
             className={cn(
-              'flex items-center justify-between p-4 sm:p-5 rounded-xl border cursor-pointer transition-all duration-300 min-h-[56px] shadow-sm outline-none',
+              'flex items-center justify-between p-4 sm:p-5 rounded-2xl border cursor-pointer transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] min-h-[64px] outline-none',
               isSelected
-                ? 'border-green-500 bg-green-50 ring-1 ring-green-500 text-green-700 scale-[1.02]'
-                : 'border-slate-200 text-slate-700 bg-white hover:border-slate-300 hover:bg-slate-50 focus-visible:ring-2 focus-visible:ring-primary',
+                ? 'border-primary bg-primary/10 ring-1 ring-primary text-primary shadow-glow scale-[1.02] -translate-y-1'
+                : 'border-[#333333] text-foreground bg-[#111111]/80 hover:border-primary/50 hover:bg-[#111111] hover:-translate-y-1 hover:shadow-elevation focus-visible:ring-2 focus-visible:ring-primary',
             )}
           >
             <span className="text-base sm:text-lg font-medium">{opt}</span>
             {isSelected ? (
-              <CheckCircle2 className="h-5 w-5 text-green-500 animate-in zoom-in duration-300 shrink-0 ml-3" />
+              <CheckCircle2 className="h-5 w-5 text-primary animate-in zoom-in duration-300 shrink-0 ml-3" />
             ) : (
-              <Circle className="h-5 w-5 text-slate-300 shrink-0 ml-3" />
+              <Circle className="h-5 w-5 text-[#333333] shrink-0 ml-3" />
             )}
           </div>
         )

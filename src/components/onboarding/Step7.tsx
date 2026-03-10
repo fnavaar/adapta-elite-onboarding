@@ -57,7 +57,7 @@ export const Step7 = ({ data }: StepProps) => {
       setIsModalOpen(false)
       toast({
         title: 'Consulta agendada com sucesso!',
-        className: 'bg-green-50 border-green-200 text-green-800',
+        className: 'bg-primary/10 border-primary/20 text-primary',
       })
     } catch (e) {
       toast({
@@ -73,16 +73,20 @@ export const Step7 = ({ data }: StepProps) => {
   if (meetingId) {
     return (
       <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500 text-center py-8">
-        <div className="mx-auto w-16 h-16 bg-green-100 text-green-700 rounded-full flex items-center justify-center mb-6 shadow-sm">
+        <div className="mx-auto w-16 h-16 bg-primary/10 text-primary border border-primary/20 rounded-full flex items-center justify-center mb-6 shadow-glow">
           <CheckCircle2 className="w-8 h-8" />
         </div>
-        <h2 className="text-2xl sm:text-3xl font-semibold text-primary">Consulta Confirmada!</h2>
-        <p className="text-slate-600 text-lg max-w-md mx-auto">
+        <h2 className="text-2xl sm:text-3xl font-bold text-primary font-display">
+          Consulta Confirmada!
+        </h2>
+        <p className="text-muted-foreground text-lg max-w-md mx-auto">
           Sua consultoria foi agendada com sucesso. Nossa equipe entrará em contato em breve.
         </p>
-        <div className="mt-8 p-6 bg-slate-50 rounded-xl border border-slate-200 max-w-sm mx-auto shadow-inner">
-          <div className="text-sm text-slate-600 mb-1 font-medium">ID da Reunião</div>
-          <div className="text-xl font-mono font-bold text-slate-900">{meetingId}</div>
+        <div className="mt-8 p-6 bg-[#111111]/80 rounded-2xl border border-[#333333] max-w-sm mx-auto shadow-elevation hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">
+          <div className="text-sm text-muted-foreground mb-1 font-medium">ID da Reunião</div>
+          <div className="text-2xl font-mono font-bold text-primary tracking-wider">
+            {meetingId}
+          </div>
         </div>
       </div>
     )
@@ -90,20 +94,20 @@ export const Step7 = ({ data }: StepProps) => {
 
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500 text-center py-8">
-      <div className="mx-auto w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-6 shadow-sm">
+      <div className="mx-auto w-16 h-16 bg-[#111111] text-primary border border-[#333333] rounded-full flex items-center justify-center mb-6 shadow-elevation">
         <Calendar className="w-8 h-8" />
       </div>
-      <h2 className="text-2xl sm:text-3xl font-semibold text-primary">
+      <h2 className="text-2xl sm:text-3xl font-bold text-primary font-display">
         Tudo certo com seus dados!
       </h2>
-      <p className="text-slate-600 text-lg max-w-md mx-auto">
+      <p className="text-muted-foreground text-lg max-w-md mx-auto">
         Agora, escolha o melhor horário para conversarmos sobre suas necessidades e objetivos.
       </p>
 
       <div className="pt-8 flex justify-center">
         <Button
           size="lg"
-          className="h-14 px-8 text-lg w-full max-w-sm shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+          className="h-14 px-8 text-lg w-full max-w-sm"
           onClick={handleOpenCalendar}
           disabled={isLoadingCalendar}
         >
@@ -117,25 +121,24 @@ export const Step7 = ({ data }: StepProps) => {
       </div>
 
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="sm:max-w-[425px] p-6">
+        <DialogContent className="sm:max-w-[425px] p-6 bg-[#0C0C0D] border-[#333333]">
           <DialogHeader>
-            <DialogTitle className="text-xl">Escolha um horário</DialogTitle>
-            <DialogDescription className="text-base text-slate-600">
+            <DialogTitle className="text-xl font-display text-foreground">
+              Escolha um horário
+            </DialogTitle>
+            <DialogDescription className="text-base text-muted-foreground">
               Selecione a data e horário de sua preferência para a consultoria.
             </DialogDescription>
           </DialogHeader>
           <div className="py-6 space-y-6">
             <div className="space-y-3">
-              <Label className="text-base font-medium text-slate-900">Data</Label>
+              <Label className="text-base font-medium text-foreground">Data</Label>
               <div className="grid grid-cols-3 gap-2">
                 {['Hoje', 'Amanhã', 'Depois'].map((d) => (
                   <Button
                     key={d}
                     variant={selectedDate === d ? 'default' : 'outline'}
-                    className={cn(
-                      'h-12 text-sm sm:text-base transition-all duration-300',
-                      selectedDate === d && 'bg-primary ring-2 ring-primary/20 shadow-md',
-                    )}
+                    className={cn('h-12 text-sm sm:text-base transition-all duration-300')}
                     onClick={() => setSelectedDate(d)}
                   >
                     {d}
@@ -145,15 +148,14 @@ export const Step7 = ({ data }: StepProps) => {
             </div>
             {selectedDate && (
               <div className="space-y-3 animate-in fade-in slide-in-from-top-2 duration-300">
-                <Label className="text-base font-medium text-slate-900">Horário</Label>
+                <Label className="text-base font-medium text-foreground">Horário</Label>
                 <div className="grid grid-cols-3 gap-2">
                   {['09:00', '10:30', '14:00', '15:30', '17:00'].map((t) => (
                     <Button
                       key={t}
                       variant={selectedTime === t ? 'default' : 'outline'}
                       className={cn(
-                        'h-12 text-sm sm:text-base transition-all duration-300',
-                        selectedTime === t && 'bg-primary ring-2 ring-primary/20 shadow-md',
+                        'h-12 text-sm sm:text-base font-display tracking-wide transition-all duration-300',
                       )}
                       onClick={() => setSelectedTime(t)}
                     >

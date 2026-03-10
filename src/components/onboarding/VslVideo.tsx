@@ -61,7 +61,10 @@ export function VslVideo({ isCompleted, onComplete }: VslVideoProps) {
 
   if (error) {
     return (
-      <Alert variant="destructive" className="mb-4 bg-red-50 border-red-200 text-red-800">
+      <Alert
+        variant="destructive"
+        className="mb-4 bg-destructive/10 border-destructive/20 text-destructive"
+      >
         <AlertCircle className="h-4 w-4" color="currentColor" />
         <AlertTitle>Erro na reprodução</AlertTitle>
         <AlertDescription>{error}</AlertDescription>
@@ -70,7 +73,7 @@ export function VslVideo({ isCompleted, onComplete }: VslVideoProps) {
   }
 
   return (
-    <div className="w-full max-w-[600px] mx-auto rounded-xl overflow-hidden shadow-xl border border-slate-200 bg-slate-900">
+    <div className="w-full max-w-[600px] mx-auto rounded-2xl overflow-hidden shadow-elevation border border-[#333333] bg-[#0C0C0D] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-1 hover:shadow-glow">
       <AspectRatio ratio={16 / 9}>
         <video
           ref={videoRef}
