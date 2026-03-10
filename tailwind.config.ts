@@ -85,7 +85,7 @@ export default {
       boxShadow: {
         subtle: '0 4px 20px rgba(0, 0, 0, 0.3)',
         elevation: '0 8px 30px rgba(0, 0, 0, 0.5)',
-        glow: '0 0 15px rgba(217, 185, 121, 0.15)',
+        glow: '0 0 15px rgba(217, 185, 121, 0.4)',
       },
     },
   },

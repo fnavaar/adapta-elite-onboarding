@@ -1,4 +1,4 @@
-import { C as useToast, D as require_react, E as require_react_dom, O as __toESM, S as composeEventHandlers, _ as createSlot, a as cn, b as require_jsx_runtime, c as createLucideIcon, d as Presence, f as Portal, g as createCollection, h as Primitive, i as useId, l as cva, m as useCallbackRef$1, n as createSlot$1, o as X, p as DismissableLayer, r as useSize, s as CircleAlert, t as Button, u as useControllableState, v as createContext2, x as useComposedRefs, y as createContextScope } from "./index-D23w2jkS.js";
+import { C as useToast, D as require_react, E as require_react_dom, O as __toESM, S as composeEventHandlers, _ as createSlot, a as cn, b as require_jsx_runtime, c as createLucideIcon, d as Presence, f as Portal, g as createCollection, h as Primitive, i as useId, l as cva, m as useCallbackRef$1, n as createSlot$1, o as X, p as DismissableLayer, r as useSize, s as CircleAlert, t as Button, u as useControllableState, v as createContext2, x as useComposedRefs, y as createContextScope } from "./index-B-YZLdpw.js";
 var CalendarDays = createLucideIcon("calendar-days", [
 	["path", {
 		d: "M8 2v4",
@@ -847,7 +847,7 @@ const Step1 = ({ data, updateAdditionalData }) => {
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
 				"data-uid": "src/components/onboarding/Steps.tsx:35:9",
 				"data-prohibitions": "[]",
-				className: "text-2xl sm:text-3xl font-bold text-primary font-display",
+				className: "text-2xl sm:text-3xl font-bold font-display",
 				children: "Seus Dados"
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 				"data-uid": "src/components/onboarding/Steps.tsx:36:9",
@@ -879,7 +879,7 @@ const Step1 = ({ data, updateAdditionalData }) => {
 						"data-uid": "src/components/onboarding/Steps.tsx:45:11",
 						"data-prohibitions": "[editContent]",
 						autoFocus: true,
-						className: cn("h-14 text-lg bg-[#111111]/80 rounded-xl transition-all duration-300 hover:border-primary/50", nameError ? "border-red-500/50 focus-visible:ring-red-500" : name.trim().length >= 3 ? "border-primary/50 focus-visible:ring-primary shadow-glow" : "border-[#333333]"),
+						className: cn("h-14 text-lg bg-[#111111]/80 rounded-[8px] transition-all duration-300 hover:border-primary/50", nameError ? "border-red-500/50 focus-visible:ring-red-500" : name.trim().length >= 3 ? "border-primary/50 focus-visible:ring-primary shadow-glow" : "border-[#333333]"),
 						placeholder: "Ex: João Silva",
 						value: name,
 						onChange: (e) => updateAdditionalData({ name: e.target.value })
@@ -911,7 +911,7 @@ const Step1 = ({ data, updateAdditionalData }) => {
 						"data-uid": "src/components/onboarding/Steps.tsx:69:11",
 						"data-prohibitions": "[editContent]",
 						type: "email",
-						className: cn("h-14 text-lg bg-[#111111]/80 rounded-xl transition-all duration-300 hover:border-primary/50", emailError ? "border-red-500/50 focus-visible:ring-red-500" : email.length > 0 && !emailError ? "border-primary/50 focus-visible:ring-primary shadow-glow" : "border-[#333333]"),
+						className: cn("h-14 text-lg bg-[#111111]/80 rounded-[8px] transition-all duration-300 hover:border-primary/50", emailError ? "border-red-500/50 focus-visible:ring-red-500" : email.length > 0 && !emailError ? "border-primary/50 focus-visible:ring-primary shadow-glow" : "border-[#333333]"),
 						placeholder: "nome@exemplo.com",
 						value: email,
 						onChange: (e) => updateAdditionalData({ email: e.target.value })
@@ -939,36 +939,36 @@ const Step2 = ({ data, updateAdditionalData }) => /* @__PURE__ */ (0, import_jsx
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
 				"data-uid": "src/components/onboarding/Steps.tsx:97:7",
 				"data-prohibitions": "[]",
-				className: "text-2xl sm:text-3xl font-bold text-primary font-display",
+				className: "text-2xl sm:text-3xl font-bold font-display",
 				children: "Mensagem Importante"
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-				"data-uid": "src/components/onboarding/Steps.tsx:100:7",
+				"data-uid": "src/components/onboarding/Steps.tsx:98:7",
 				"data-prohibitions": "[]",
 				className: "text-muted-foreground text-lg",
 				children: "Assista ao vídeo abaixo para entender nossa metodologia."
 			})]
 		}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			"data-uid": "src/components/onboarding/Steps.tsx:104:5",
+			"data-uid": "src/components/onboarding/Steps.tsx:102:5",
 			"data-prohibitions": "[]",
 			className: "pt-4",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(VslVideo, {
-				"data-uid": "src/components/onboarding/Steps.tsx:105:7",
+				"data-uid": "src/components/onboarding/Steps.tsx:103:7",
 				"data-prohibitions": "[editContent]",
 				isCompleted: data.additionalData.vslWatched,
 				onComplete: () => updateAdditionalData({ vslWatched: true })
 			})
 		}),
 		data.additionalData.vslWatched && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/components/onboarding/Steps.tsx:111:7",
+			"data-uid": "src/components/onboarding/Steps.tsx:109:7",
 			"data-prohibitions": "[]",
-			className: "max-w-[600px] mx-auto mt-6 p-4 bg-primary/10 border border-primary/20 rounded-2xl flex items-center justify-center gap-3 text-primary shadow-glow animate-in fade-in slide-in-from-bottom-2 duration-500",
+			className: "max-w-[600px] mx-auto mt-6 p-4 bg-primary/10 border border-primary/20 rounded-[8px] flex items-center justify-center gap-3 text-primary shadow-glow animate-in fade-in slide-in-from-bottom-2 duration-500",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, {
-				"data-uid": "src/components/onboarding/Steps.tsx:112:9",
+				"data-uid": "src/components/onboarding/Steps.tsx:110:9",
 				"data-prohibitions": "[editContent]",
 				className: "h-5 w-5"
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-				"data-uid": "src/components/onboarding/Steps.tsx:113:9",
+				"data-uid": "src/components/onboarding/Steps.tsx:111:9",
 				"data-prohibitions": "[]",
 				className: "font-medium",
 				children: "Vídeo concluído! Você já pode continuar."
@@ -986,24 +986,24 @@ var PROFESSIONS = [
 	"Desenvolvedor"
 ];
 const Step3 = ({ data, updateData }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-	"data-uid": "src/components/onboarding/Steps.tsx:130:3",
+	"data-uid": "src/components/onboarding/Steps.tsx:128:3",
 	"data-prohibitions": "[]",
 	className: "space-y-4 animate-in fade-in slide-in-from-right-4 duration-500",
 	children: [
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-			"data-uid": "src/components/onboarding/Steps.tsx:131:5",
+			"data-uid": "src/components/onboarding/Steps.tsx:129:5",
 			"data-prohibitions": "[]",
-			className: "text-2xl sm:text-3xl font-bold text-primary font-display",
+			className: "text-2xl sm:text-3xl font-bold font-display",
 			children: "Sua Área de Atuação"
 		}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-			"data-uid": "src/components/onboarding/Steps.tsx:134:5",
+			"data-uid": "src/components/onboarding/Steps.tsx:130:5",
 			"data-prohibitions": "[]",
 			className: "text-muted-foreground text-lg",
 			children: "Selecione sua profissão para personalizarmos sua experiência."
 		}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RadioCards, {
-			"data-uid": "src/components/onboarding/Steps.tsx:137:5",
+			"data-uid": "src/components/onboarding/Steps.tsx:133:5",
 			"data-prohibitions": "[editContent]",
 			value: data.profession,
 			onChange: (v) => updateData({
@@ -1062,18 +1062,18 @@ var USE_CASES_MAP = {
 const Step4 = ({ data, updateData }) => {
 	const options$1 = USE_CASES_MAP[data.profession] || [];
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/components/onboarding/Steps.tsx:194:5",
+		"data-uid": "src/components/onboarding/Steps.tsx:190:5",
 		"data-prohibitions": "[editContent]",
 		className: "space-y-4 animate-in fade-in slide-in-from-right-4 duration-500",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-				"data-uid": "src/components/onboarding/Steps.tsx:195:7",
+				"data-uid": "src/components/onboarding/Steps.tsx:191:7",
 				"data-prohibitions": "[]",
-				className: "text-2xl sm:text-3xl font-bold text-primary font-display",
+				className: "text-2xl sm:text-3xl font-bold font-display",
 				children: "Interesses e Casos de Uso"
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-				"data-uid": "src/components/onboarding/Steps.tsx:198:7",
+				"data-uid": "src/components/onboarding/Steps.tsx:192:7",
 				"data-prohibitions": "[editContent]",
 				className: "text-muted-foreground text-lg",
 				children: [
@@ -1083,52 +1083,52 @@ const Step4 = ({ data, updateData }) => {
 				]
 			}),
 			options$1.length > 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CheckboxCards, {
-				"data-uid": "src/components/onboarding/Steps.tsx:202:9",
+				"data-uid": "src/components/onboarding/Steps.tsx:196:9",
 				"data-prohibitions": "[editContent]",
 				values: data.useCases,
 				onChange: (v) => updateData({ useCases: v }),
 				options: options$1
 			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/components/onboarding/Steps.tsx:208:9",
+				"data-uid": "src/components/onboarding/Steps.tsx:202:9",
 				"data-prohibitions": "[]",
-				className: "p-4 bg-amber-500/10 border border-amber-500/20 text-amber-500 rounded-2xl",
+				className: "p-4 bg-amber-500/10 border border-amber-500/20 text-amber-500 rounded-[8px]",
 				children: "Por favor, volte e selecione uma profissão primeiro."
 			})
 		]
 	});
 };
 const Step5 = ({ data, updateAdditionalData }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-	"data-uid": "src/components/onboarding/Steps.tsx:217:3",
+	"data-uid": "src/components/onboarding/Steps.tsx:211:3",
 	"data-prohibitions": "[editContent]",
 	className: "space-y-8 animate-in fade-in slide-in-from-right-4 duration-500",
 	children: [
 		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/components/onboarding/Steps.tsx:218:5",
+			"data-uid": "src/components/onboarding/Steps.tsx:212:5",
 			"data-prohibitions": "[]",
 			className: "space-y-4",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-				"data-uid": "src/components/onboarding/Steps.tsx:219:7",
+				"data-uid": "src/components/onboarding/Steps.tsx:213:7",
 				"data-prohibitions": "[]",
-				className: "text-2xl sm:text-3xl font-bold text-primary font-display",
+				className: "text-2xl sm:text-3xl font-bold font-display",
 				children: "Seu Perfil Financeiro"
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-				"data-uid": "src/components/onboarding/Steps.tsx:222:7",
+				"data-uid": "src/components/onboarding/Steps.tsx:214:7",
 				"data-prohibitions": "[]",
 				className: "text-muted-foreground text-lg",
 				children: "Para entendermos seu momento atual."
 			})]
 		}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/components/onboarding/Steps.tsx:224:5",
+			"data-uid": "src/components/onboarding/Steps.tsx:216:5",
 			"data-prohibitions": "[]",
 			className: "space-y-4",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-				"data-uid": "src/components/onboarding/Steps.tsx:225:7",
+				"data-uid": "src/components/onboarding/Steps.tsx:217:7",
 				"data-prohibitions": "[]",
-				className: "text-xl font-medium text-foreground",
+				className: "text-xl font-medium text-primary",
 				children: "1. Volume de Portfólio"
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(RadioCards, {
-				"data-uid": "src/components/onboarding/Steps.tsx:226:7",
+				"data-uid": "src/components/onboarding/Steps.tsx:218:7",
 				"data-prohibitions": "[editContent]",
 				value: data.additionalData.portfolio,
 				onChange: (v) => updateAdditionalData({ portfolio: v }),
@@ -1142,16 +1142,16 @@ const Step5 = ({ data, updateAdditionalData }) => /* @__PURE__ */ (0, import_jsx
 			})]
 		}),
 		data.additionalData.portfolio && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			"data-uid": "src/components/onboarding/Steps.tsx:234:7",
+			"data-uid": "src/components/onboarding/Steps.tsx:226:7",
 			"data-prohibitions": "[]",
 			className: "space-y-4 pt-6 border-t border-[#333333] animate-in fade-in slide-in-from-top-4 duration-500",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-				"data-uid": "src/components/onboarding/Steps.tsx:235:9",
+				"data-uid": "src/components/onboarding/Steps.tsx:227:9",
 				"data-prohibitions": "[]",
-				className: "text-xl font-medium text-foreground",
+				className: "text-xl font-medium text-primary",
 				children: "2. Perfil de Risco"
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(RadioCards, {
-				"data-uid": "src/components/onboarding/Steps.tsx:236:9",
+				"data-uid": "src/components/onboarding/Steps.tsx:228:9",
 				"data-prohibitions": "[editContent]",
 				value: data.additionalData.risk,
 				onChange: (v) => updateAdditionalData({ risk: v }),
@@ -1167,26 +1167,26 @@ const Step5 = ({ data, updateAdditionalData }) => /* @__PURE__ */ (0, import_jsx
 	]
 });
 const Step6 = ({ data }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-	"data-uid": "src/components/onboarding/Steps.tsx:248:3",
+	"data-uid": "src/components/onboarding/Steps.tsx:240:3",
 	"data-prohibitions": "[editContent]",
 	className: "space-y-6 animate-in fade-in slide-in-from-right-4 duration-500",
 	children: [
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-			"data-uid": "src/components/onboarding/Steps.tsx:249:5",
+			"data-uid": "src/components/onboarding/Steps.tsx:241:5",
 			"data-prohibitions": "[]",
-			className: "text-2xl sm:text-3xl font-bold text-primary font-display",
+			className: "text-2xl sm:text-3xl font-bold font-display",
 			children: "Revisão Final"
 		}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-			"data-uid": "src/components/onboarding/Steps.tsx:250:5",
+			"data-uid": "src/components/onboarding/Steps.tsx:242:5",
 			"data-prohibitions": "[]",
 			className: "text-muted-foreground text-lg",
 			children: "Confirme seus dados antes de enviar sua solicitação."
 		}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			"data-uid": "src/components/onboarding/Steps.tsx:253:5",
+			"data-uid": "src/components/onboarding/Steps.tsx:245:5",
 			"data-prohibitions": "[editContent]",
-			className: "space-y-3 bg-[#111111]/80 p-6 rounded-2xl border border-[#333333] text-sm sm:text-base shadow-elevation hover:-translate-y-1 transition-all duration-300 ease-in-out",
+			className: "space-y-3 bg-[#111111]/80 p-6 rounded-[8px] border border-[#333333] text-sm sm:text-base shadow-elevation hover:-translate-y-1 transition-all duration-300 ease-in-out",
 			children: Object.entries({
 				Nome: data.additionalData.name,
 				"E-mail": data.additionalData.email,
@@ -1195,16 +1195,16 @@ const Step6 = ({ data }) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", 
 				Portfólio: data.additionalData.portfolio,
 				Risco: data.additionalData.risk
 			}).map(([k, v]) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/onboarding/Steps.tsx:262:9",
+				"data-uid": "src/components/onboarding/Steps.tsx:254:9",
 				"data-prohibitions": "[editContent]",
 				className: "flex flex-col sm:flex-row sm:justify-between border-b border-[#333333] last:border-0 pb-3 pt-1 last:pb-0 gap-1",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					"data-uid": "src/components/onboarding/Steps.tsx:266:11",
+					"data-uid": "src/components/onboarding/Steps.tsx:258:11",
 					"data-prohibitions": "[editContent]",
 					className: "text-muted-foreground",
 					children: k
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					"data-uid": "src/components/onboarding/Steps.tsx:267:11",
+					"data-uid": "src/components/onboarding/Steps.tsx:259:11",
 					"data-prohibitions": "[editContent]",
 					className: "font-medium text-foreground sm:text-right sm:w-2/3",
 					children: v || "-"
@@ -2529,26 +2529,26 @@ const Step7 = ({ data }) => {
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
 				"data-uid": "src/components/onboarding/Step7.tsx:79:9",
 				"data-prohibitions": "[]",
-				className: "text-2xl sm:text-3xl font-bold text-primary font-display",
+				className: "text-2xl sm:text-3xl font-bold font-display",
 				children: "Consulta Confirmada!"
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-				"data-uid": "src/components/onboarding/Step7.tsx:82:9",
+				"data-uid": "src/components/onboarding/Step7.tsx:80:9",
 				"data-prohibitions": "[]",
 				className: "text-muted-foreground text-lg max-w-md mx-auto",
 				children: "Sua consultoria foi agendada com sucesso. Nossa equipe entrará em contato em breve."
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/components/onboarding/Step7.tsx:85:9",
+				"data-uid": "src/components/onboarding/Step7.tsx:83:9",
 				"data-prohibitions": "[editContent]",
-				className: "mt-8 p-6 bg-[#111111]/80 rounded-2xl border border-[#333333] max-w-sm mx-auto shadow-elevation hover:-translate-y-1 transition-all duration-300 ease-in-out",
+				className: "mt-8 p-6 bg-[#111111]/80 rounded-[8px] border border-[#333333] max-w-sm mx-auto shadow-elevation hover:-translate-y-1 transition-all duration-300 ease-in-out",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/components/onboarding/Step7.tsx:86:11",
+					"data-uid": "src/components/onboarding/Step7.tsx:84:11",
 					"data-prohibitions": "[]",
 					className: "text-sm text-muted-foreground mb-1 font-medium",
 					children: "ID da Reunião"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/components/onboarding/Step7.tsx:87:11",
+					"data-uid": "src/components/onboarding/Step7.tsx:85:11",
 					"data-prohibitions": "[editContent]",
 					className: "text-2xl font-mono font-bold text-primary tracking-wider",
 					children: meetingId
@@ -2557,94 +2557,94 @@ const Step7 = ({ data }) => {
 		]
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		"data-uid": "src/components/onboarding/Step7.tsx:96:5",
+		"data-uid": "src/components/onboarding/Step7.tsx:94:5",
 		"data-prohibitions": "[editContent]",
 		className: "space-y-6 animate-in fade-in slide-in-from-right-4 duration-500 text-center py-8",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/components/onboarding/Step7.tsx:97:7",
+				"data-uid": "src/components/onboarding/Step7.tsx:95:7",
 				"data-prohibitions": "[]",
 				className: "mx-auto w-16 h-16 bg-[#111111] text-primary border border-[#333333] rounded-full flex items-center justify-center mb-6 shadow-elevation",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar, {
-					"data-uid": "src/components/onboarding/Step7.tsx:98:9",
+					"data-uid": "src/components/onboarding/Step7.tsx:96:9",
 					"data-prohibitions": "[editContent]",
 					className: "w-8 h-8"
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-				"data-uid": "src/components/onboarding/Step7.tsx:100:7",
+				"data-uid": "src/components/onboarding/Step7.tsx:98:7",
 				"data-prohibitions": "[]",
-				className: "text-2xl sm:text-3xl font-bold text-primary font-display",
+				className: "text-2xl sm:text-3xl font-bold font-display",
 				children: "Tudo certo com seus dados!"
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-				"data-uid": "src/components/onboarding/Step7.tsx:103:7",
+				"data-uid": "src/components/onboarding/Step7.tsx:99:7",
 				"data-prohibitions": "[]",
 				className: "text-muted-foreground text-lg max-w-md mx-auto",
 				children: "Agora, escolha o melhor horário para conversarmos sobre suas necessidades e objetivos."
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/components/onboarding/Step7.tsx:107:7",
+				"data-uid": "src/components/onboarding/Step7.tsx:103:7",
 				"data-prohibitions": "[editContent]",
 				className: "pt-8 flex justify-center",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-					"data-uid": "src/components/onboarding/Step7.tsx:108:9",
+					"data-uid": "src/components/onboarding/Step7.tsx:104:9",
 					"data-prohibitions": "[editContent]",
 					size: "lg",
 					className: "h-14 px-8 text-lg w-full max-w-sm",
 					onClick: handleOpenCalendar,
 					disabled: isLoadingCalendar,
 					children: [isLoadingCalendar ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-						"data-uid": "src/components/onboarding/Step7.tsx:115:13",
+						"data-uid": "src/components/onboarding/Step7.tsx:111:13",
 						"data-prohibitions": "[editContent]",
 						className: "mr-2 h-5 w-5 animate-spin"
 					}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CalendarDays, {
-						"data-uid": "src/components/onboarding/Step7.tsx:117:13",
+						"data-uid": "src/components/onboarding/Step7.tsx:113:13",
 						"data-prohibitions": "[editContent]",
 						className: "mr-2 h-5 w-5"
 					}), "Agendar Consultoria"]
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
-				"data-uid": "src/components/onboarding/Step7.tsx:123:7",
+				"data-uid": "src/components/onboarding/Step7.tsx:119:7",
 				"data-prohibitions": "[editContent]",
 				open: isModalOpen,
 				onOpenChange: setIsModalOpen,
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-					"data-uid": "src/components/onboarding/Step7.tsx:124:9",
+					"data-uid": "src/components/onboarding/Step7.tsx:120:9",
 					"data-prohibitions": "[editContent]",
-					className: "sm:max-w-[425px] p-6 bg-[#0C0C0D] border-[#333333]",
+					className: "sm:max-w-[425px] p-6 bg-[#0C0C0D] border-[#333333] rounded-[8px]",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogHeader, {
-							"data-uid": "src/components/onboarding/Step7.tsx:125:11",
+							"data-uid": "src/components/onboarding/Step7.tsx:121:11",
 							"data-prohibitions": "[]",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
-								"data-uid": "src/components/onboarding/Step7.tsx:126:13",
+								"data-uid": "src/components/onboarding/Step7.tsx:122:13",
 								"data-prohibitions": "[]",
-								className: "text-xl font-display text-foreground",
+								className: "text-xl font-display text-primary",
 								children: "Escolha um horário"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogDescription, {
-								"data-uid": "src/components/onboarding/Step7.tsx:129:13",
+								"data-uid": "src/components/onboarding/Step7.tsx:125:13",
 								"data-prohibitions": "[]",
 								className: "text-base text-muted-foreground",
 								children: "Selecione a data e horário de sua preferência para a consultoria."
 							})]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							"data-uid": "src/components/onboarding/Step7.tsx:133:11",
+							"data-uid": "src/components/onboarding/Step7.tsx:129:11",
 							"data-prohibitions": "[editContent]",
 							className: "py-6 space-y-6",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/onboarding/Step7.tsx:134:13",
+								"data-uid": "src/components/onboarding/Step7.tsx:130:13",
 								"data-prohibitions": "[editContent]",
 								className: "space-y-3",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
-									"data-uid": "src/components/onboarding/Step7.tsx:135:15",
+									"data-uid": "src/components/onboarding/Step7.tsx:131:15",
 									"data-prohibitions": "[]",
 									className: "text-base font-medium text-foreground",
 									children: "Data"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-									"data-uid": "src/components/onboarding/Step7.tsx:136:15",
+									"data-uid": "src/components/onboarding/Step7.tsx:132:15",
 									"data-prohibitions": "[editContent]",
 									className: "grid grid-cols-3 gap-2",
 									children: [
@@ -2652,7 +2652,7 @@ const Step7 = ({ data }) => {
 										"Amanhã",
 										"Depois"
 									].map((d) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-										"data-uid": "src/components/onboarding/Step7.tsx:138:19",
+										"data-uid": "src/components/onboarding/Step7.tsx:134:19",
 										"data-prohibitions": "[editContent]",
 										variant: selectedDate === d ? "default" : "outline",
 										className: cn("h-12 text-sm sm:text-base transition-all duration-300"),
@@ -2661,16 +2661,16 @@ const Step7 = ({ data }) => {
 									}, d))
 								})]
 							}), selectedDate && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								"data-uid": "src/components/onboarding/Step7.tsx:150:15",
+								"data-uid": "src/components/onboarding/Step7.tsx:146:15",
 								"data-prohibitions": "[editContent]",
 								className: "space-y-3 animate-in fade-in slide-in-from-top-2 duration-300",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
-									"data-uid": "src/components/onboarding/Step7.tsx:151:17",
+									"data-uid": "src/components/onboarding/Step7.tsx:147:17",
 									"data-prohibitions": "[]",
 									className: "text-base font-medium text-foreground",
 									children: "Horário"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-									"data-uid": "src/components/onboarding/Step7.tsx:152:17",
+									"data-uid": "src/components/onboarding/Step7.tsx:148:17",
 									"data-prohibitions": "[editContent]",
 									className: "grid grid-cols-3 gap-2",
 									children: [
@@ -2680,7 +2680,7 @@ const Step7 = ({ data }) => {
 										"15:30",
 										"17:00"
 									].map((t) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-										"data-uid": "src/components/onboarding/Step7.tsx:154:21",
+										"data-uid": "src/components/onboarding/Step7.tsx:150:21",
 										"data-prohibitions": "[editContent]",
 										variant: selectedTime === t ? "default" : "outline",
 										className: cn("h-12 text-sm sm:text-base font-display tracking-wide transition-all duration-300"),
@@ -2691,24 +2691,24 @@ const Step7 = ({ data }) => {
 							})]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, {
-							"data-uid": "src/components/onboarding/Step7.tsx:169:11",
+							"data-uid": "src/components/onboarding/Step7.tsx:165:11",
 							"data-prohibitions": "[editContent]",
 							className: "sm:justify-between gap-3",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-								"data-uid": "src/components/onboarding/Step7.tsx:170:13",
+								"data-uid": "src/components/onboarding/Step7.tsx:166:13",
 								"data-prohibitions": "[]",
 								variant: "outline",
 								className: "h-11 flex-1",
 								onClick: () => setIsModalOpen(false),
 								children: "Cancelar"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-								"data-uid": "src/components/onboarding/Step7.tsx:173:13",
+								"data-uid": "src/components/onboarding/Step7.tsx:169:13",
 								"data-prohibitions": "[editContent]",
 								className: "h-11 flex-1 transition-all duration-300",
 								disabled: !selectedDate || !selectedTime || isScheduling,
 								onClick: handleSchedule,
 								children: [isScheduling && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-									"data-uid": "src/components/onboarding/Step7.tsx:178:32",
+									"data-uid": "src/components/onboarding/Step7.tsx:174:32",
 									"data-prohibitions": "[editContent]",
 									className: "mr-2 h-4 w-4 animate-spin"
 								}), isScheduling ? "Confirmando..." : "Confirmar"]
@@ -2819,7 +2819,7 @@ function Index() {
 				if (Math.random() > .95) throw new Error("Simulated failure");
 				toast({
 					title: "Dados salvos com sucesso!",
-					className: "bg-green-50 border-green-200 text-green-800"
+					className: "bg-primary/10 border-primary/20 text-primary"
 				});
 				localStorage.removeItem("adapta_onboarding_data");
 				setStep(7);
@@ -2905,11 +2905,11 @@ function Index() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		"data-uid": "src/pages/Index.tsx:202:5",
 		"data-prohibitions": "[editContent]",
-		className: "min-h-screen bg-slate-50 flex flex-col font-sans",
+		className: "min-h-screen flex flex-col font-sans",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
 			"data-uid": "src/pages/Index.tsx:203:7",
 			"data-prohibitions": "[editContent]",
-			className: "w-full bg-white border-b border-slate-200 py-4 px-6 sticky top-0 z-10",
+			className: "w-full bg-[#0C0C0D]/80 backdrop-blur-md border-b border-[#333333] py-4 px-6 sticky top-0 z-10",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				"data-uid": "src/pages/Index.tsx:204:9",
 				"data-prohibitions": "[editContent]",
@@ -2917,21 +2917,21 @@ function Index() {
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 					"data-uid": "src/pages/Index.tsx:205:11",
 					"data-prohibitions": "[]",
-					className: "font-bold text-xl text-primary tracking-tight",
+					className: "font-bold text-xl text-primary tracking-tight font-display",
 					children: "Adapta Elite"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					"data-uid": "src/pages/Index.tsx:206:11",
+					"data-uid": "src/pages/Index.tsx:208:11",
 					"data-prohibitions": "[editContent]",
-					className: "text-sm font-medium text-slate-600",
+					className: "text-sm font-medium text-muted-foreground",
 					children: step < 7 ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
 						"Etapa ",
 						step,
 						" de 6",
 						" ",
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-							"data-uid": "src/pages/Index.tsx:210:17",
+							"data-uid": "src/pages/Index.tsx:212:17",
 							"data-prohibitions": "[editContent]",
-							className: "ml-1 text-slate-500",
+							className: "ml-1 text-muted-foreground/70",
 							children: [
 								"(",
 								Math.round(step / 6 * 100),
@@ -2939,34 +2939,34 @@ function Index() {
 							]
 						})
 					] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-						"data-uid": "src/pages/Index.tsx:213:15",
+						"data-uid": "src/pages/Index.tsx:217:15",
 						"data-prohibitions": "[]",
-						className: "text-green-700 font-semibold flex items-center gap-1",
+						className: "text-primary font-semibold flex items-center gap-1",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, {
-							"data-uid": "src/pages/Index.tsx:214:17",
+							"data-uid": "src/pages/Index.tsx:218:17",
 							"data-prohibitions": "[editContent]",
 							className: "w-4 h-4"
 						}), " Concluído"]
 					})
 				})]
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Index.tsx:220:9",
+				"data-uid": "src/pages/Index.tsx:224:9",
 				"data-prohibitions": "[editContent]",
 				className: "max-w-3xl mx-auto relative z-0 mt-2",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/pages/Index.tsx:221:11",
+						"data-uid": "src/pages/Index.tsx:225:11",
 						"data-prohibitions": "[editContent]",
-						className: "absolute top-1/2 left-0 w-full h-1.5 bg-slate-100 -translate-y-1/2 rounded-full z-[-1]"
+						className: "absolute top-1/2 left-0 w-full h-1.5 bg-[#262626] -translate-y-1/2 rounded-full z-[-1]"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/pages/Index.tsx:222:11",
+						"data-uid": "src/pages/Index.tsx:226:11",
 						"data-prohibitions": "[editContent]",
 						className: "absolute top-1/2 left-0 h-1.5 bg-primary -translate-y-1/2 rounded-full transition-all duration-700 ease-in-out z-[-1]",
 						style: { width: `${Math.min((step - 1) / 5 * 100, 100)}%` }
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						"data-uid": "src/pages/Index.tsx:226:11",
+						"data-uid": "src/pages/Index.tsx:230:11",
 						"data-prohibitions": "[editContent]",
 						className: "relative flex justify-between w-full",
 						children: [
@@ -2980,11 +2980,11 @@ function Index() {
 							const isCompleted = step === 7 ? true : i < step;
 							const isActive = step === 7 ? false : i === step;
 							return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								"data-uid": "src/pages/Index.tsx:232:17",
+								"data-uid": "src/pages/Index.tsx:236:17",
 								"data-prohibitions": "[editContent]",
-								className: cn("w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm sm:text-base font-semibold transition-all duration-500", isActive ? "bg-primary text-primary-foreground ring-4 ring-primary/20 scale-110 shadow-md" : isCompleted ? "bg-primary text-primary-foreground scale-100" : "bg-slate-200 text-slate-700 opacity-80 scale-95"),
+								className: cn("w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm sm:text-base font-semibold transition-all duration-500", isActive ? "bg-primary text-primary-foreground ring-4 ring-primary/20 scale-110 shadow-glow" : isCompleted ? "bg-primary text-primary-foreground scale-100" : "bg-[#262626] text-muted-foreground opacity-80 scale-95"),
 								children: isCompleted ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, {
-									"data-uid": "src/pages/Index.tsx:244:21",
+									"data-uid": "src/pages/Index.tsx:248:21",
 									"data-prohibitions": "[editContent]",
 									className: "w-4 h-4 sm:w-5 sm:h-5 animate-in zoom-in duration-300"
 								}) : i
@@ -2994,20 +2994,20 @@ function Index() {
 				]
 			})]
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
-			"data-uid": "src/pages/Index.tsx:255:7",
+			"data-uid": "src/pages/Index.tsx:259:7",
 			"data-prohibitions": "[editContent]",
 			className: "flex-1 w-full max-w-3xl mx-auto p-4 md:p-8 flex flex-col justify-center py-10",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				"data-uid": "src/pages/Index.tsx:256:9",
+				"data-uid": "src/pages/Index.tsx:260:9",
 				"data-prohibitions": "[editContent]",
-				className: "bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-10 flex-1 min-h-[400px]",
+				className: "bg-[#111111]/80 backdrop-blur-sm rounded-[16px] shadow-elevation border border-[#333333] p-6 md:p-10 flex-1 min-h-[400px]",
 				children: renderStep()
 			}), step < 7 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				"data-uid": "src/pages/Index.tsx:261:11",
+				"data-uid": "src/pages/Index.tsx:265:11",
 				"data-prohibitions": "[editContent]",
 				className: "flex items-center justify-between mt-8 pb-10 gap-4",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-					"data-uid": "src/pages/Index.tsx:262:13",
+					"data-uid": "src/pages/Index.tsx:266:13",
 					"data-prohibitions": "[editContent]",
 					variant: "outline",
 					size: "lg",
@@ -3015,31 +3015,31 @@ function Index() {
 					disabled: isSubmitting || step === 1,
 					className: cn("h-14 px-4 sm:px-6 text-base shadow-sm", step === 1 && "invisible"),
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronLeft, {
-						"data-uid": "src/pages/Index.tsx:269:15",
+						"data-uid": "src/pages/Index.tsx:273:15",
 						"data-prohibitions": "[editContent]",
 						className: "mr-1 sm:mr-2 h-5 w-5"
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						"data-uid": "src/pages/Index.tsx:270:15",
+						"data-uid": "src/pages/Index.tsx:274:15",
 						"data-prohibitions": "[]",
 						className: "hidden sm:inline",
 						children: "Voltar"
 					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-					"data-uid": "src/pages/Index.tsx:273:13",
+					"data-uid": "src/pages/Index.tsx:277:13",
 					"data-prohibitions": "[editContent]",
 					size: "lg",
 					onClick: handleNext,
 					disabled: isSubmitting || !isValid(),
-					className: cn("h-14 px-6 sm:px-8 text-base transition-all duration-500", !isValid() ? "bg-slate-200 text-slate-500 cursor-not-allowed border-none shadow-none disabled:opacity-80" : "bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg hover:-translate-y-0.5"),
+					className: cn("h-14 px-6 sm:px-8 text-base transition-all duration-500", !isValid() ? "bg-[#262626] text-[#666666] cursor-not-allowed border-none shadow-none disabled:opacity-80 hover:bg-[#262626] hover:-translate-y-0 hover:shadow-none" : "bg-primary hover:bg-primary/90 text-primary-foreground shadow-glow hover:shadow-glow hover:-translate-y-0.5"),
 					children: [
 						isSubmitting && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
-							"data-uid": "src/pages/Index.tsx:284:32",
+							"data-uid": "src/pages/Index.tsx:288:32",
 							"data-prohibitions": "[editContent]",
 							className: "mr-2 h-5 w-5 animate-spin"
 						}),
 						!isSubmitting && step === 6 ? "Finalizar" : !isSubmitting ? "Continuar" : "Enviando...",
 						!isSubmitting && step !== 6 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, {
-							"data-uid": "src/pages/Index.tsx:290:47",
+							"data-uid": "src/pages/Index.tsx:294:47",
 							"data-prohibitions": "[editContent]",
 							className: "ml-1 sm:ml-2 h-5 w-5"
 						})
@@ -3051,4 +3051,4 @@ function Index() {
 }
 export { Index as default };
 
-//# sourceMappingURL=Index-CtolTzOC.js.map
+//# sourceMappingURL=Index-BjoFHDh2.js.map

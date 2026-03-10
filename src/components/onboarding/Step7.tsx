@@ -76,13 +76,11 @@ export const Step7 = ({ data }: StepProps) => {
         <div className="mx-auto w-16 h-16 bg-primary/10 text-primary border border-primary/20 rounded-full flex items-center justify-center mb-6 shadow-glow">
           <CheckCircle2 className="w-8 h-8" />
         </div>
-        <h2 className="text-2xl sm:text-3xl font-bold text-primary font-display">
-          Consulta Confirmada!
-        </h2>
+        <h2 className="text-2xl sm:text-3xl font-bold font-display">Consulta Confirmada!</h2>
         <p className="text-muted-foreground text-lg max-w-md mx-auto">
           Sua consultoria foi agendada com sucesso. Nossa equipe entrará em contato em breve.
         </p>
-        <div className="mt-8 p-6 bg-[#111111]/80 rounded-2xl border border-[#333333] max-w-sm mx-auto shadow-elevation hover:-translate-y-1 transition-all duration-300 ease-in-out">
+        <div className="mt-8 p-6 bg-[#111111]/80 rounded-[8px] border border-[#333333] max-w-sm mx-auto shadow-elevation hover:-translate-y-1 transition-all duration-300 ease-in-out">
           <div className="text-sm text-muted-foreground mb-1 font-medium">ID da Reunião</div>
           <div className="text-2xl font-mono font-bold text-primary tracking-wider">
             {meetingId}
@@ -97,9 +95,7 @@ export const Step7 = ({ data }: StepProps) => {
       <div className="mx-auto w-16 h-16 bg-[#111111] text-primary border border-[#333333] rounded-full flex items-center justify-center mb-6 shadow-elevation">
         <Calendar className="w-8 h-8" />
       </div>
-      <h2 className="text-2xl sm:text-3xl font-bold text-primary font-display">
-        Tudo certo com seus dados!
-      </h2>
+      <h2 className="text-2xl sm:text-3xl font-bold font-display">Tudo certo com seus dados!</h2>
       <p className="text-muted-foreground text-lg max-w-md mx-auto">
         Agora, escolha o melhor horário para conversarmos sobre suas necessidades e objetivos.
       </p>
@@ -121,9 +117,9 @@ export const Step7 = ({ data }: StepProps) => {
       </div>
 
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="sm:max-w-[425px] p-6 bg-[#0C0C0D] border-[#333333]">
+        <DialogContent className="sm:max-w-[425px] p-6 bg-[#0C0C0D] border-[#333333] rounded-[8px]">
           <DialogHeader>
-            <DialogTitle className="text-xl font-display text-foreground">
+            <DialogTitle className="text-xl font-display text-primary">
               Escolha um horário
             </DialogTitle>
             <DialogDescription className="text-base text-muted-foreground">

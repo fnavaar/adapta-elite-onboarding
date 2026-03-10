@@ -23992,7 +23992,7 @@ function getElementRef(element) {
 	if (mayWarn) return element.props.ref;
 	return element.props.ref || element.ref;
 }
-var buttonVariants = cva("inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-semibold font-display tracking-wide ring-offset-background transition-all duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0", {
+var buttonVariants = cva("inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[8px] text-sm font-semibold font-display tracking-wide ring-offset-background transition-all duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0", {
 	variants: {
 		variant: {
 			default: "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-glow hover:-translate-y-1",
@@ -24004,8 +24004,8 @@ var buttonVariants = cva("inline-flex items-center justify-center gap-2 whitespa
 		},
 		size: {
 			default: "h-10 px-4 py-2",
-			sm: "h-9 rounded-lg px-3",
-			lg: "h-11 rounded-xl px-8",
+			sm: "h-9 rounded-[8px] px-3",
+			lg: "h-11 rounded-[8px] px-8",
 			icon: "h-10 w-10"
 		}
 	},
@@ -24158,8 +24158,8 @@ function Layout() {
 		})
 	});
 }
-var Index = (0, import_react.lazy)(() => __vitePreload(() => import("./Index-CtolTzOC.js"), []));
-var NotFound = (0, import_react.lazy)(() => __vitePreload(() => import("./NotFound-BXlklvBk.js"), []));
+var Index = (0, import_react.lazy)(() => __vitePreload(() => import("./Index-BjoFHDh2.js"), []));
+var NotFound = (0, import_react.lazy)(() => __vitePreload(() => import("./NotFound-DEfRNN8h.js"), []));
 var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ErrorBoundary, {
 	"data-uid": "src/App.tsx:15:3",
 	"data-prohibitions": "[]",
@@ -24194,7 +24194,7 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ErrorBoundary, {
 							fallback: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 								"data-uid": "src/App.tsx:24:17",
 								"data-prohibitions": "[]",
-								className: "min-h-screen flex items-center justify-center bg-slate-50",
+								className: "min-h-screen flex items-center justify-center bg-transparent",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 									"data-uid": "src/App.tsx:25:19",
 									"data-prohibitions": "[]",
@@ -24244,4 +24244,4 @@ var App_default = App;
 }));
 export { useToast as C, require_react as D, require_react_dom as E, __toESM as O, composeEventHandlers as S, useLocation as T, createSlot$1 as _, cn as a, require_jsx_runtime as b, createLucideIcon as c, Presence as d, Portal as f, createCollection as g, Primitive as h, useId as i, cva as l, useCallbackRef as m, createSlot as n, X as o, DismissableLayer as p, useSize as r, CircleAlert as s, Button as t, useControllableState as u, createContext2 as v, Link as w, useComposedRefs as x, createContextScope as y };
 
-//# sourceMappingURL=index-D23w2jkS.js.map
+//# sourceMappingURL=index-B-YZLdpw.js.map

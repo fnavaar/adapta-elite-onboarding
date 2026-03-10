@@ -9,22 +9,22 @@
 @layer base {
   :root {
     --background: 240 4% 5%; /* #0C0C0D */
-    --foreground: 0 0% 98%;
+    --foreground: 0 0% 100%; /* #FFFFFF */
 
     --card: 0 0% 7%; /* #111111 */
-    --card-foreground: 0 0% 98%;
+    --card-foreground: 0 0% 100%;
 
     --popover: 0 0% 7%;
-    --popover-foreground: 0 0% 98%;
+    --popover-foreground: 0 0% 100%;
 
     --primary: 40 54% 66%; /* #D9B979 */
-    --primary-foreground: 240 4% 5%;
+    --primary-foreground: 240 4% 5%; /* #0C0C0D */
 
     --secondary: 0 0% 15%; /* #262626 */
-    --secondary-foreground: 0 0% 98%;
+    --secondary-foreground: 0 0% 100%;
 
     --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
+    --muted-foreground: 0 0% 75.3%; /* #C0C0C0 */
 
     --accent: 40 54% 66%;
     --accent-foreground: 240 4% 5%;
@@ -36,22 +36,22 @@
     --input: 0 0% 20%;
     --ring: 40 54% 66%;
 
-    --radius: 1rem; /* 16px border radius */
+    --radius: 0.5rem; /* 8px border radius */
   }
 
   .dark {
     --background: 240 4% 5%;
-    --foreground: 0 0% 98%;
+    --foreground: 0 0% 100%;
     --card: 0 0% 7%;
-    --card-foreground: 0 0% 98%;
+    --card-foreground: 0 0% 100%;
     --popover: 0 0% 7%;
-    --popover-foreground: 0 0% 98%;
+    --popover-foreground: 0 0% 100%;
     --primary: 40 54% 66%;
     --primary-foreground: 240 4% 5%;
     --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary-foreground: 0 0% 100%;
     --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
+    --muted-foreground: 0 0% 75.3%;
     --accent: 40 54% 66%;
     --accent-foreground: 240 4% 5%;
     --destructive: 0 84.2% 60.2%;
@@ -68,7 +68,7 @@
 
   body {
     font-family: 'Instrument Sans', sans-serif;
-    background-color: hsl(var(--background));
+    background-color: transparent;
     color: hsl(var(--foreground));
     -webkit-font-smoothing: antialiased;
   }
@@ -80,6 +80,7 @@
   h5,
   h6 {
     font-family: 'Chakra Petch', sans-serif;
+    color: hsl(var(--primary));
   }
 
   ::-webkit-scrollbar {

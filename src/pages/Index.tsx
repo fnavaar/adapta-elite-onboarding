@@ -144,7 +144,7 @@ export default function Index() {
 
         toast({
           title: 'Dados salvos com sucesso!',
-          className: 'bg-green-50 border-green-200 text-green-800',
+          className: 'bg-primary/10 border-primary/20 text-primary',
         })
 
         localStorage.removeItem('adapta_onboarding_data')
@@ -199,18 +199,22 @@ export default function Index() {
   if (!isLoaded) return null
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-      <header className="w-full bg-white border-b border-slate-200 py-4 px-6 sticky top-0 z-10">
+    <div className="min-h-screen flex flex-col font-sans">
+      <header className="w-full bg-[#0C0C0D]/80 backdrop-blur-md border-b border-[#333333] py-4 px-6 sticky top-0 z-10">
         <div className="max-w-3xl mx-auto flex items-center justify-between mb-4">
-          <div className="font-bold text-xl text-primary tracking-tight">Adapta Elite</div>
-          <div className="text-sm font-medium text-slate-600">
+          <div className="font-bold text-xl text-primary tracking-tight font-display">
+            Adapta Elite
+          </div>
+          <div className="text-sm font-medium text-muted-foreground">
             {step < 7 ? (
               <>
                 Etapa {step} de 6{' '}
-                <span className="ml-1 text-slate-500">({Math.round((step / 6) * 100)}%)</span>
+                <span className="ml-1 text-muted-foreground/70">
+                  ({Math.round((step / 6) * 100)}%)
+                </span>
               </>
             ) : (
-              <span className="text-green-700 font-semibold flex items-center gap-1">
+              <span className="text-primary font-semibold flex items-center gap-1">
                 <Check className="w-4 h-4" /> Concluído
               </span>
             )}
@@ -218,7 +222,7 @@ export default function Index() {
         </div>
 
         <div className="max-w-3xl mx-auto relative z-0 mt-2">
-          <div className="absolute top-1/2 left-0 w-full h-1.5 bg-slate-100 -translate-y-1/2 rounded-full z-[-1]" />
+          <div className="absolute top-1/2 left-0 w-full h-1.5 bg-[#262626] -translate-y-1/2 rounded-full z-[-1]" />
           <div
             className="absolute top-1/2 left-0 h-1.5 bg-primary -translate-y-1/2 rounded-full transition-all duration-700 ease-in-out z-[-1]"
             style={{ width: `${Math.min(((step - 1) / 5) * 100, 100)}%` }}
@@ -234,10 +238,10 @@ export default function Index() {
                   className={cn(
                     'w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm sm:text-base font-semibold transition-all duration-500',
                     isActive
-                      ? 'bg-primary text-primary-foreground ring-4 ring-primary/20 scale-110 shadow-md'
+                      ? 'bg-primary text-primary-foreground ring-4 ring-primary/20 scale-110 shadow-glow'
                       : isCompleted
                         ? 'bg-primary text-primary-foreground scale-100'
-                        : 'bg-slate-200 text-slate-700 opacity-80 scale-95',
+                        : 'bg-[#262626] text-muted-foreground opacity-80 scale-95',
                   )}
                 >
                   {isCompleted ? (
@@ -253,7 +257,7 @@ export default function Index() {
       </header>
 
       <main className="flex-1 w-full max-w-3xl mx-auto p-4 md:p-8 flex flex-col justify-center py-10">
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-10 flex-1 min-h-[400px]">
+        <div className="bg-[#111111]/80 backdrop-blur-sm rounded-[16px] shadow-elevation border border-[#333333] p-6 md:p-10 flex-1 min-h-[400px]">
           {renderStep()}
         </div>
 
@@ -277,8 +281,8 @@ export default function Index() {
               className={cn(
                 'h-14 px-6 sm:px-8 text-base transition-all duration-500',
                 !isValid()
-                  ? 'bg-slate-200 text-slate-500 cursor-not-allowed border-none shadow-none disabled:opacity-80'
-                  : 'bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg hover:-translate-y-0.5',
+                  ? 'bg-[#262626] text-[#666666] cursor-not-allowed border-none shadow-none disabled:opacity-80 hover:bg-[#262626] hover:-translate-y-0 hover:shadow-none'
+                  : 'bg-primary hover:bg-primary/90 text-primary-foreground shadow-glow hover:shadow-glow hover:-translate-y-0.5',
               )}
             >
               {isSubmitting && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
